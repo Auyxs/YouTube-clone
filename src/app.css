@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn-round {
+    border-radius: 20px;
+}
+
+.card {
+    border: none;
+}
+
+.profile {
+    background-color: rgb(31, 31, 31);
+    color: lig;
+}
+
+.nav-link {
+    color: rgb(55, 55, 55);
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.material-symbols-outlined {
+    font-weight: 700; 
+    font-size: 24px;  
+  }
+
+.video-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+    border-radius: 10px;
+}
+
+.video-link:hover .video-overlay {
+    opacity: 1; 
+}
+
+.play-button {
+    pointer-events: none; 
+}
