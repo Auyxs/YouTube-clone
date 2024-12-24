@@ -1,4 +1,10 @@
 
+<script>
+	/** @type {{ data: import('./$types').PageData, form: import('./$types').ActionData }} */
+	let { data, form } = $props();
+</script>
+
+
 
 <div class="container">
   <div class="row justify-content-center py-5">
@@ -9,7 +15,8 @@
           <h2 class="text-center">Hi User</h2>
           <h4 class="fs-6 fw-normal text-center text-secondary mb-4">Sign in to your account</h4>
           
-          <form action="#!" class="">
+          <form action="?/login" method="POST">
+            {#if form?.incorrect}<p class="text-danger text-center">Invalid credentials!</p>{/if}
             <div class="row gy-2 overflow-hidden">
               <div class="col-12">
                 <div class="form-floating mb-3">
@@ -23,12 +30,15 @@
                   <label for="password" class="form-label fw-light">Password</label>
                 </div>
               </div>
-
+             
               <div class="d-flex justify-content-between align-items-center my-4">
                 <a href="/login" class="text-decoration-none link-primary">Forgot password?</a>
                 <button class="btn btn-primary col-4" type="submit">Log in</button>
               </div>
+
             </div>
+
+            
           </form>
 
            
@@ -37,3 +47,7 @@
     </div>
   </div>
 </div>
+
+{#if form?.success}
+	<p>Successfully logged in! Welcome back</p>
+{/if}
