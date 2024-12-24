@@ -6,7 +6,6 @@ export const actions = {
         const data = await request.formData();
         const username = data.get("username");
         const password = data.get("password");
-        console.log(username, password)
 
         const res = await fetch('https://dummyjson.com/auth/login', {
             method: 'POST',

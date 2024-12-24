@@ -3,13 +3,12 @@
   import 'bootstrap/dist/css/bootstrap.min.css';
   import '../app.css';
 
-  let { children } = $props();
+  let { data, children } = $props();
 </script>
 
 <div>
-  <Navbar />
+  <Navbar logged_user={data.logged_user}/>
   <div class="main-content d-flex">
-    
     {@render children()}
   </div>
 </div>
