@@ -1,9 +1,7 @@
-
 <script>
 	/** @type {{ data: import('./$types').PageData, form: import('./$types').ActionData }} */
 	let { data, form } = $props();
 </script>
-
 
 
 <div class="container">
@@ -16,6 +14,7 @@
           <h4 class="fs-6 fw-normal text-center text-secondary mb-4">Sign in to your account</h4>
           
           <form action="?/login" method="POST">
+          
             {#if form?.incorrect}<p class="text-danger text-center">Invalid credentials!</p>{/if}
             <div class="row gy-2 overflow-hidden">
               <div class="col-12">
@@ -47,7 +46,3 @@
     </div>
   </div>
 </div>
-
-{#if form?.success}
-	<p>Successfully logged in! Welcome back</p>
-{/if}

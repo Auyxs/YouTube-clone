@@ -1,8 +1,8 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
-    login: async ({ request }) => {
+    login: async ({ request, cookies }) => {
         const data = await request.formData();
         const username = data.get("username");
         const password = data.get("password");
@@ -21,7 +21,14 @@ export const actions = {
         }
 
         const result = await res.json();
-        console.log(result)
-        return { success: true };
+
+        cookies.set('accessToken', result.accessToken, {
+            httpOnly: true,
+            path: '/',
+            maxAge: 60 * 60, 
+        });
+
+        redirect(302, '/'); 
+        return {sucess: true};
     }
 };
