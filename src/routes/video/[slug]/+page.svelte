@@ -2,21 +2,6 @@
 	import TagSection from "$lib/components/TagSection.svelte";
 
   let {data} = $props();
-  let comments = [];
-
-  data.posts.forEach(post => {
-    data.users.forEach(user => {
-      if (user.id === post.userId) { 
-        let comment = {
-          username: user.username,
-          image: user.image || 'https://via.placeholder.com/40', 
-          body: post.body,
-          like: post.reactions.like  
-        };
-        comments.push(comment);
-      }
-    });
-  });
 
 </script>
 
@@ -83,7 +68,7 @@
 
         <div class="col-lg-12">
             <h1>Comments</h1>
-            {#each comments as comment}
+            {#each data.comments as comment}
 
             <div class="d-flex align-items-center m-1 p-2">
               <div class="me-3">
@@ -109,7 +94,7 @@
           <TagSection />
         </div>
 
-        {#each data.videos as video}
+        {#each data.suggestedVideos as video}
           <div class="d-flex mb-4">
             <a href="/video/{video.Id}" class="video-link">
                 <div class="position-relative" style="width: 100%; height: 0; padding-bottom: 50%;">
