@@ -1,5 +1,6 @@
-import { getVideoById, getVideos, getVideoComments, addLike, hasLiked, removeLike } from '$lib/server/db.js';
-import { redirect } from '@sveltejs/kit';
+import { getVideoComments } from '$lib/server/comment.js';
+import { addLike, hasLiked, removeLike } from '$lib/server/like.js';
+import { getVideoById, getVideos } from '$lib/server/video.js';
 
 export async function load({ params, locals }) {
   const { slug } = params;
@@ -19,23 +20,18 @@ export async function load({ params, locals }) {
   };
 }
 
-
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
     like: async ({params, locals}) => {
       const { slug } = params;
       if (locals.user != null)
         await addLike(locals.user.id, slug)
-
-      redirect(302, `/video/${slug}`)
     },
 
     removelike: async ({params, locals}) => {
       const { slug } = params;
       if (locals.user != null)
         await removeLike(locals.user.id, slug)
-      
-      redirect(302, `/video/${slug}`)
     },
 
 }
