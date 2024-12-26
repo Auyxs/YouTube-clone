@@ -2,7 +2,6 @@
 	import TagSection from "$lib/components/TagSection.svelte";
 
   let {data} = $props();
-
 </script>
 
 <div class="container-fluid m-3 ms-5 pt-2">
@@ -20,13 +19,13 @@
             
             <div class="d-flex align-items-center">
               <div class="me-3">
-                <a href="/channel/@{data.author.username}">
-                  <img src="{data.author.image || ''}" alt="User" class="rounded-circle profile" style="width: 60px; height: 60px;" />
+                <a href="/channel/@{data.video.user.username}">
+                  <img src="{data.video.user.image || ''}" alt="User" class="rounded-circle profile" style="width: 60px; height: 60px;" />
                 </a>
               </div>
           
               <div>
-                <h5 class="mb-1">{data.author.username}</h5>
+                <h5 class="mb-1">{data.video.user.username}</h5>
                 <p class="text-muted mb-0" style="font-size: 14px;">100,000 subscribers</p>
               </div>
 
@@ -39,7 +38,7 @@
               <div class="d-flex flex-row">
                 <button class="btn btn-light btn-round px-3 py-2 d-flex align-items-center me-2">
                   <span class="material-symbols-outlined me-2">thumb_up</span>
-                  Like
+                  {data.video.like}
                 </button>
                 <button class="btn btn-light btn-round px-3 py-2 d-flex align-items-center me-2">
                   <span class="material-symbols-outlined me-2">thumb_down</span>
@@ -72,11 +71,11 @@
 
             <div class="d-flex align-items-center m-1 p-2">
               <div class="me-3">
-                <img src="{comment.image || ''}" alt="User" class="rounded-circle profile" style="width: 50px; height: auto;" />
+                <img src="{comment.user.image || ''}" alt="User" class="rounded-circle profile" style="width: 50px; height: auto;" />
               </div>
      
               <div>
-                <h6 class="mb-1">@{comment.username}</h6>
+                <h6 class="mb-1">@{comment.user.username}</h6>
                 <p class="text-muted mb-0" style="font-size: 14px;">{comment.body}</p>
               </div>
 
