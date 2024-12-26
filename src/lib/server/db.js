@@ -65,29 +65,26 @@ export function hasLiked(userId, videoId) {
 }
 
 export async function addLike(userId, videoId) {
-    if (!hasLiked) return;
-  
     const newLike = { user_id: +userId, video_id: +videoId };
     likeData.push(newLike);
 
     try {
         const filePath = path.resolve('src/lib/data/like.json'); 
-        await fs.writeFile(filePath, JSON.stringify(likeData, null, 2));
+        await fs.writeFile(filePath, JSON.stringify(likeData));
     } catch (err) {
         throw new Error('Failed to save like data');
     }
 }
 
 export async function removeLike(userId, videoId) {
-    if (hasLiked) return;
-    let mutableLikeData = JSON.parse(JSON.stringify(likeData));
-    mutableLikeData = mutableLikeData.filter(like => like.user_id !== userId || like.video_id !== videoId);
+    const updatedLikes = likeData.filter(like => like.user_id !== +userId || like.video_id !== +videoId);
 
     try {
         const filePath = path.resolve('src/lib/data/like.json');
-        await fs.promises.writeFile(filePath, JSON.stringify(mutableLikeData, null, 2));
+        await fs.writeFile(filePath, JSON.stringify(updatedLikes, null, 2));
+        likeData.length = 0;
+        likeData.push(...updatedLikes);
     } catch (err) {
         throw new Error('Failed to save like data');
     }
-
 }

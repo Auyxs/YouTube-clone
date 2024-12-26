@@ -1,4 +1,5 @@
 import { getVideoById, getVideos, getVideoComments, addLike, hasLiked, removeLike } from '$lib/server/db.js';
+import { redirect } from '@sveltejs/kit';
 
 export async function load({ params, locals }) {
   const { slug } = params;
@@ -26,21 +27,15 @@ export const actions = {
       if (locals.user != null)
         await addLike(locals.user.id, slug)
 
-      return {
-        status: 200,
-        message: 'Like added successfully',
-      };
+      redirect(302, `/video/${slug}`)
     },
 
     removelike: async ({params, locals}) => {
       const { slug } = params;
       if (locals.user != null)
         await removeLike(locals.user.id, slug)
-
-      return {
-        status: 200,
-        message: 'Like removed successfully',
-      };
+      
+      redirect(302, `/video/${slug}`)
     },
 
 }
