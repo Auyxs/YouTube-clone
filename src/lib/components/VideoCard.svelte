@@ -6,11 +6,10 @@
 <div class="card">
     <a href="/video/{video.Id}" class="video-link">
         <div class="position-relative" style="width: 100%; padding-bottom: 50%;">
-
             <img src="https://img.youtube.com/vi/{video.URL}/hqdefault.jpg" 
                 alt="{video.title} thumbnail" 
-                class="card-img-top rounded-3" 
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" />
+                class="card-img-top rounded-3 position-absolute" 
+                style="top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" />
             
             <div class="video-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center text-white">
                 <span class="play-button fs-1">▶</span>
