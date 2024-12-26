@@ -2,6 +2,7 @@ import videosData from '$lib/data/video.json';
 import { getLikes } from './like';
 import { getUsers, getUserById } from './user';
 
+
 export async function getVideos(limit = 12) {
     const start = Math.floor(Math.random() * (videosData.length - limit - 1));
     const selectedVideos = videosData.slice(start, start + limit);
@@ -26,4 +27,8 @@ export async function getVideoById(id) {
 
 export async function getUserVideos(userId) {
     return videosData.filter(video => video.user_id === +userId);
+}
+
+export async function getLikedVideos(likes) {
+    return await Promise.all(likes.map((like) => getVideoById(like.video_id)));
 }

@@ -32,3 +32,7 @@ export async function removeLike(userId, videoId) {
         throw new Error('Failed to save like data');
     }
 }
+
+export async function getUserLikes(userId) {
+    return likeData.filter(like => like.user_id == userId);
+}

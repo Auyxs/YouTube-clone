@@ -34,14 +34,9 @@
     align-items: center;
   }
 
-  @media (max-width: 1400px) {
-    .sidebar {
-      display: none !important;
-    }
-  }
 </style>
 
-<div class="flex-shrink-0 p-3 sidebar">
+<div class="flex-shrink-0 p-3 sidebar d-sm-none d-md-none d-lg-block">
 
   <ul class="nav d-flex flex-column">
 
@@ -69,7 +64,7 @@
     </li>
 
     <li class="nav-item">
-      <a href="/" class="nav-link">
+      <a href="/liked" class="nav-link">
         <span class="material-symbols-outlined me-4">thumb_up</span>
         Liked videos
       </a>
