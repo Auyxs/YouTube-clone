@@ -28,6 +28,5 @@ export const actions = {
         });
 
         redirect(302, '/'); 
-        return {sucess: true};
     }
 };

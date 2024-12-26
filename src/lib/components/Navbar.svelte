@@ -58,11 +58,16 @@
           </div>
           
           <div class="px-3 py-2 d-flex align-items-center">
-            <span class="material-symbols-outlined me-4">
-              logout
-            </span>
-            Sign Out
+            <form action="/logout" method="POST">
+              <button type="submit" class="d-flex align-items-center bg-transparent border-0">
+                  <span class="material-symbols-outlined me-4">
+                      logout
+                  </span>
+                  Sign Out
+              </button>
+            </form>
           </div>
+
 
         </div>
       {/if}
