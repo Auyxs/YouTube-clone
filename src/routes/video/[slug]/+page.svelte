@@ -36,10 +36,22 @@
           
             <div class="mx-4">
               <div class="d-flex flex-row">
-                <button class="btn btn-light btn-round px-3 py-2 d-flex align-items-center me-2">
-                  <span class="material-symbols-outlined me-2">thumb_up</span>
-                  {data.video.like}
-                </button>
+                {#if !data.liked}
+                  <form method="post" action="?/like">
+                    <button type="submit" class="btn btn-light btn-round px-3 py-2 d-flex align-items-center me-2">
+                      <span class="material-symbols-outlined me-2">thumb_up</span>
+                      {data.video.like}
+                    </button>
+                  </form>
+                {:else}
+                  <form method="post" action="?/removelike">
+                    <button type="submit" class="btn btn-dark btn-round px-3 py-2 d-flex align-items-center me-2">
+                      <span class="material-symbols-outlined me-2 liked" >thumb_up</span>
+                      {data.video.like}
+                    </button>
+                  </form>
+                {/if}
+
                 <button class="btn btn-light btn-round px-3 py-2 d-flex align-items-center me-2">
                   <span class="material-symbols-outlined me-2">thumb_down</span>
                   Dislike

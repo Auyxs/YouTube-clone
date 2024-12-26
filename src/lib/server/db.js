@@ -2,6 +2,8 @@ import videosData from '$lib/data/video.json';
 import likeData from '$lib/data/like.json';
 import commentData from '$lib/data/comment.json';
 import subscriptionData from '$lib/data/subsciption.json'
+import { promises as fs } from 'fs';
+import path from 'path'
 
 let cachedUsers = null;
 
@@ -31,7 +33,7 @@ export async function getVideoById(id) {
     if (!video) throw new Error('Video not found');
 
     const user = await getUserById(video.user_id);
-    const like = likeData.filter(like => like.video_id === video.Id).length
+    const like = likeData.filter(like => like.video_id == video.Id).length
     return {
         ...video,
         user,
@@ -58,3 +60,34 @@ export async function getUserById(user_id) {
     return {username: user.username, image: user.image}
 }
 
+export function hasLiked(userId, videoId) {
+    return likeData.find(like => like.user_id == userId && like.video_id == videoId) !== undefined;
+}
+
+export async function addLike(userId, videoId) {
+    if (!hasLiked) return;
+  
+    const newLike = { user_id: +userId, video_id: +videoId };
+    likeData.push(newLike);
+
+    try {
+        const filePath = path.resolve('src/lib/data/like.json'); 
+        await fs.writeFile(filePath, JSON.stringify(likeData, null, 2));
+    } catch (err) {
+        throw new Error('Failed to save like data');
+    }
+}
+
+export async function removeLike(userId, videoId) {
+    if (hasLiked) return;
+    let mutableLikeData = JSON.parse(JSON.stringify(likeData));
+    mutableLikeData = mutableLikeData.filter(like => like.user_id !== userId || like.video_id !== videoId);
+
+    try {
+        const filePath = path.resolve('src/lib/data/like.json');
+        await fs.promises.writeFile(filePath, JSON.stringify(mutableLikeData, null, 2));
+    } catch (err) {
+        throw new Error('Failed to save like data');
+    }
+
+}
