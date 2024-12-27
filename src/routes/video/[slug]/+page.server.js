@@ -32,6 +32,12 @@ export const actions = {
       const { slug } = params;
       if (locals.user != null)
         await removeLike(locals.user.id, slug)
+      
     },
+
+    comment: async () => {
+      console.log("comment")
+      return
+    }
 
 }

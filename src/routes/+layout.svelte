@@ -8,7 +8,7 @@
 
 <div>
   <Navbar logged_user={data.logged_user}/>
-  <div class="main-content d-flex">
+  <div class="main-content d-flex pt-5">
     {@render children()}
   </div>
 </div>

@@ -1,7 +1,7 @@
 <script>
   export let logged_user = null;
 
-  let isDropdownOpen = false 
+  let isDropdownOpen = false; 
 
   const handleDropdownFocusLoss = ({ relatedTarget, currentTarget }) => {
     if (relatedTarget instanceof HTMLElement && currentTarget.contains(relatedTarget)) return 
@@ -9,28 +9,33 @@
   }
 </script>
 
-<nav class="navbar navbar-expand-lg sticky-top">
+<nav class="navbar navbar-expand-lg fixed-top p-2 bg-white">
 <div class="container-fluid">
-  <div>
-    <button class="btn rounded-circle">
+
+  <div class="d-flex align-items-center justify-content-center">
+    <button class="btn me-3 rounded-circle d-flex align-items-center justify-content-center">
       <span class="material-symbols-outlined">menu</span>
     </button>
-    
+
+
     <a href="/">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" alt="YouTube Logo" style="height: 25px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" alt="YouTube Logo" style="height: 20px;">
     </a>
   </div>
 
-  <form class="d-flex w-25">
-    <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-light search-btn d-flex align-items-center justify-content-center" type="submit">
-      <span class="material-symbols-outlined">search</span>
-    </button>
+  <form class="col-6">
+    <div class="d-flex">
+      <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn search-btn d-flex align-items-center justify-content-center" type="submit">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+    </div>
+
   </form>
 
   {#if logged_user !== null}
-    <div class="dropdown" on:focusout={handleDropdownFocusLoss}>
-      <button on:click={()=> isDropdownOpen = !isDropdownOpen} class="bg-transparent border-0 p-0">
+    <div class="dropdown" onfocusout={handleDropdownFocusLoss}>
+      <button onclick={()=> isDropdownOpen = !isDropdownOpen} class="bg-transparent border-0 p-0">
         <img src="{logged_user.image}" alt="User" class="rounded-circle profile" style="width: 40px; height: 40px; cursor: pointer;" />
       </button>
 
@@ -88,18 +93,15 @@
 </div>
 </nav>
 
-
-<style>  
-  .navbar {
-    background-color: white;
-    box-shadow: 2px 0 5px rgba(148, 148, 148, 0.137);
-  }
-
-
+<style>
   .search-input {
-    border-radius: 30px; 
     padding-left: 20px; 
     font-size: 16px;      
+    font-weight: 300;
+    border-radius: 30px; 
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid rgb(210, 210, 210); 
   }
 
   .search-input:focus {
@@ -107,13 +109,16 @@
   }
 
   .search-btn {
-    border: 1px solid rgb(180, 180, 180); 
-    border-radius: 30px;
-    padding: 10px 20px; 
+      border-radius: 30px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border: 1px solid rgb(210, 210, 210); 
+      background-color: rgb(245, 245, 245);
+      padding-left: 20px;
   }
-
-  .search-btn span {
-    font-size: 18px;  
+  .search-btn:hover {
+    border: 1px solid rgb(210, 210, 210); 
+    background-color: rgb(235, 235, 235);
   }
 </style>
 

@@ -13,7 +13,7 @@
         background-color: rgb(240, 240, 240);
         font-weight: 500;
         border-radius: 10px;
-        font-size: 15px;
+        font-size: 14px;
     }
     .tag:hover {
         background-color: rgb(218, 218, 218);

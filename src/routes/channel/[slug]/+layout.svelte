@@ -21,7 +21,7 @@
 </style>
 
 <Sidebar />
-<div class="w-100">
+<div class="w-100" style="margin: 50px; margin-left: 250px;">
 
 <section class="channel-header m-5 p-4 mt-0 mb-0 pt-0 pb-0">
     <div class="channel-banner d-flex align-items-end rounded m-3 mt-0">
