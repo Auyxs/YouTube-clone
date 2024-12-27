@@ -31,7 +31,7 @@
       <img src="{data.user.image}" alt="Channel Avatar" class="profile rounded-circle m-3" style="height: 150px; width: auto;">
       <div class="m-4">
         <h1>{data.user.username}</h1>
-        <p>@{data.user.username} • {data.videos[0].views.toLocaleString()} followers • {data.videos.length} videos</p>
+        <p>@{data.user.username} • {data.user.subscribers} followers • {data.videos.length} videos</p>
         <p>Channel about description</p>
         <button class="btn btn-dark btn-round subscribe-btn">Subscribe</button>
       </div>

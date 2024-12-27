@@ -1,3 +1,5 @@
+import { getSubscribers } from "./subscription";
+
 let cachedUsers = null;
 
 export async function getUsers() {
@@ -14,11 +16,15 @@ export async function getUsers() {
 export async function getUserById(user_id) {
     const users = await getUsers();
     const user = users.find(u => u.id === user_id);
+    const subs = await getSubscribers(user.id);
 
-    return {username: user.username, image: user.image}
+    return {id: user.id, username: user.username, image: user.image, subscribers: subs }
 }
 
 export async function getUserByName(username){
     const users = await getUsers();
-    return users.find(u => u.username == username)
+    const user = users.find(u => u.username == username)
+    const subs = await getSubscribers(user.id);
+
+    return {id: user.id, username: user.username, image: user.image, subscribers: subs }
 }

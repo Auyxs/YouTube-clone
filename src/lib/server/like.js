@@ -1,6 +1,6 @@
 import likeData from '$lib/data/like.json'
 import { promises as fs } from 'fs';
-import path from 'path'
+
 
 export function hasLiked(userId, videoId) {
     return likeData.find(like => like.user_id == userId && like.video_id == videoId) !== undefined;

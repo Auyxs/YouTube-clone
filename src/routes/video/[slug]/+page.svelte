@@ -13,10 +13,11 @@
       body: formData
     });
   };
+
 </script>
 
 <div class="container-fluid m-3 ms-md-0 ms-xxl-4 pt-2">
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row ">
 
       <div class="col-lg-8 mb-2 ps-3">
 
@@ -25,7 +26,7 @@
         </div>
 
         <div>
-          <h4 class="mt-3">{data.video.title}</h4>
+          <h5 class="mt-3">{data.video.title}</h5>
 
           <div class="d-flex align-items-center pb-3">  
             <div class="d-flex align-items-center col-6">
@@ -37,12 +38,22 @@
           
               <div>
                 <h6 class="mb-1">{data.video.user.username}</h6>
-                <p class="text-muted mb-0" style="font-size: 12px;">10K subscribers</p>
+                <p class="text-muted mb-0" style="font-size: 12px;">{data.video.user.subscribers} subscribers</p>
               </div>
 
-              <div class="mx-4">
-                <button class="btn btn-round btn-dark px-3 py-2" style="font-size: 14px;">Subscribe</button>
-              </div>
+              {#if !data.subscribed}
+                <div class="mx-4">
+                  <form action="?/subscribe" method="POST">
+                      <button type="submit" class="btn btn-round btn-dark px-3 py-2" style="font-size: 14px;">Subscribe</button>
+                  </form>
+                </div>
+              {:else}
+                <div class="mx-4">
+                  <form action="?/unsubscribe" method="POST">
+                    <button class="btn btn-round btn-light px-3 py-2" style="font-size: 14px;">Subscribed</button>
+                  </form>            
+                </div>
+              {/if}
             </div>
           
             <div class="col-6">

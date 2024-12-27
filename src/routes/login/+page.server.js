@@ -24,7 +24,7 @@ export const actions = {
         cookies.set('accessToken', result.accessToken, {
             httpOnly: true,
             path: '/',
-            maxAge: 60 * 60, 
+            maxAge: 60 * 60 * 12, 
         });
 
         redirect(302, '/'); 
