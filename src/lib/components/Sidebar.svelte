@@ -16,18 +16,10 @@
     width: 240px;
   }
 
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .sidebar ul li {
-    cursor: pointer;
-  }
-
   .nav-link{
     display: flex;
     align-items: center;
+    font-size: 14px;
   }
 
 
@@ -42,7 +34,7 @@
       </li>
   
       <li class="nav-item">
-        <a href="/" class="nav-link">
+        <a href="/subscriptions" class="nav-link">
           <span class="material-symbols-outlined me-4">subscriptions</span>
           Subscriptions
         </a>
@@ -68,11 +60,11 @@
   
       <li class="nav-item">
         <a href="/" class="nav-link">
-          <span class="material-symbols-outlined me-2">settings</span>
+          <span class="material-symbols-outlined me-4">settings</span>
           Settings
         </a>
       </li>
   
     </ul>
-  </div>
+</div>
   

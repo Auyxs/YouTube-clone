@@ -10,8 +10,8 @@ export async function getSubscribers(userId){
     return subData.filter(sub => sub.user_id == userId).length;
 }
 
-export async function getSubriscriptions(userId){
-    return subData.filter(sub => sub.subscribed_user_id == userId);
+export async function getSubscriptions(userId) {
+    return subData.filter(sub => sub.subscribed_user_id == +userId);
 }
 
 export async function Subscribe(userId, channelUserId){

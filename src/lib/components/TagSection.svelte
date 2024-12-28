@@ -2,7 +2,7 @@
     const tags = ["Music", "Animation", "Games", "News"]
 </script>
 
-<button class="btn me-2 tag tag-active">All</button>
+<button class="btn me-3 tag tag-active">All</button>
 {#each tags as tag }
     <button class="btn me-2 tag">{tag}</button>
 {/each}

@@ -1,5 +1,6 @@
 import videosData from '$lib/data/video.json';
 import { getLikes } from './like';
+import { getSubscriptions } from './subscription';
 import { getUsers, getUserById } from './user';
 
 
@@ -31,4 +32,20 @@ export async function getUserVideos(userId) {
 
 export async function getLikedVideos(likes) {
     return await Promise.all(likes.map((like) => getVideoById(like.video_id)));
+}
+
+export async function getSubscribedVideos(userId, limit = 12) {
+    const subscribed = await getSubscriptions(userId);
+
+    const allVideos = await Promise.all(
+        subscribed.map(async sub => await getUserVideos(sub.user_id))
+    );
+
+    const flatVideos = allVideos.flat();
+    flatVideos.sort((a, b) => a.title.localeCompare(b.title));
+
+    const start = Math.floor(Math.random() * Math.max(1, flatVideos.length - limit));
+    const selectedVideos = flatVideos.slice(start, start + limit);
+
+    return await Promise.all(selectedVideos.map(video => getVideoById(video.Id)))
 }

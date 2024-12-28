@@ -81,7 +81,7 @@
 
   {:else}
       <div>
-        <a href="/login" class="btn btn-round btn-light border d-flex align-items-center me-2">
+        <a href="/login" class="btn btn-round btn-light border d-flex align-items-center me-2" style="color: rgb(66, 139, 255);">
           <span class="material-symbols-outlined me-2">
             account_circle
           </span>
