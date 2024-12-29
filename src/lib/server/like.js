@@ -11,6 +11,8 @@ export async function getLikes(videoId) {
 }
 
 export async function addLike(userId, videoId) {
+    if (hasLiked(userId, videoId)) return;
+
     const newLike = { user_id: +userId, video_id: +videoId };
     likeData.push(newLike);
 
@@ -22,6 +24,7 @@ export async function addLike(userId, videoId) {
 }
 
 export async function removeLike(userId, videoId) {
+    if (!hasLiked(userId, videoId)) return;
     const updatedLikes = likeData.filter(like => like.user_id !== +userId || like.video_id !== +videoId);
 
     try {

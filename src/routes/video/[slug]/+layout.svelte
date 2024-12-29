@@ -4,11 +4,11 @@
     import '../../../app.css'
   
     let { data, children } = $props();
-  </script>
+</script>
   
-  <div>
-    <Navbar logged_user={data.logged_user}/>
-    <div class="d-flex mt-5">
-        {@render children()}
-    </div>
+<div>
+  <Navbar logged_user={data.logged_user}/>
+  <div class="d-flex mt-5">
+      {@render children()}
   </div>
+</div>

@@ -2,6 +2,7 @@ import { addComment, getVideoComments } from '$lib/server/comment.js';
 import { addLike, hasLiked, removeLike } from '$lib/server/like.js';
 import { isSubscibed, Subscribe, Unsubscribe } from '$lib/server/subscription.js';
 import { getVideoById, getVideos } from '$lib/server/video.js';
+import { redirect } from '@sveltejs/kit';
 
 export async function load({ params, locals }) {
   const { slug } = params;
@@ -29,18 +30,23 @@ export async function load({ params, locals }) {
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
     like: async ({params, locals}) => {
-      const { slug } = params;
-      if (locals.user != null)
+      if (locals.user != null){
+        const { slug } = params;
         await addLike(locals.user.id, slug)
+      } else {
+        redirect('302', '/login')
+      }
+        
     },
-
     removelike: async ({params, locals}) => {
-      const { slug } = params;
-      if (locals.user != null)
+      if (locals.user != null){
+        const { slug } = params;
         await removeLike(locals.user.id, slug)
+      } else {
+        redirect('302', '/login')
+      }
       
     },
-
     addcomment: async ({ params, locals, request }) => {
       if (locals.user != null) {
         const { slug } = params;
@@ -49,23 +55,9 @@ export const actions = {
     
         if (commentText) {
           await addComment(locals.user.id, slug, commentText);
-        } 
-      }
-    },
-
-    subscribe: async ({ params, locals }) => {
-      if (locals.user != null) {
-          const { slug } = params;
-          const video = await getVideoById(slug); 
-          await Subscribe(locals.user.id, video.user.id); 
-      }
-    },
-
-    unsubscribe: async ({ params, locals }) => {
-      if (locals.user != null) {
-          const { slug } = params;
-          const video = await getVideoById(slug); 
-          await Unsubscribe(locals.user.id, video.user.id); 
+        } else {
+          redirect('302', '/login')
+        }
       }
     }
 }

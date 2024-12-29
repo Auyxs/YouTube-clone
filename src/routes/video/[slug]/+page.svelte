@@ -1,4 +1,6 @@
 <script>
+  import Like from "$lib/components/buttons/Like.svelte";
+  import Subscribe from "$lib/components/buttons/Subscribe.svelte";
   import HorizontalVideoCard from "$lib/components/HorizontalVideoCard.svelte";
 	import TagSection from "$lib/components/TagSection.svelte";
 
@@ -40,41 +42,17 @@
                 <h6 class="mb-1">{data.video.user.username}</h6>
                 <p class="text-muted mb-0" style="font-size: 12px;">{data.video.user.subscribers} subscribers</p>
               </div>
+              <div class="mx-4">
+                <Subscribe subscribed={data.subscribed} channelId={data.video.user.id}/>
+              </div>
 
-              {#if !data.subscribed}
-                <div class="mx-4">
-                  <form action="?/subscribe" method="POST">
-                      <button type="submit" class="btn btn-round btn-dark px-3 py-2" style="font-size: 14px;">Subscribe</button>
-                  </form>
-                </div>
-              {:else}
-                <div class="mx-4">
-                  <form action="?/unsubscribe" method="POST">
-                    <button class="btn btn-round btn-light px-3 py-2" style="font-size: 14px;">Subscribed</button>
-                  </form>            
-                </div>
-              {/if}
             </div>
           
             <div class="col-6">
               <div class="d-flex flex-row justify-content-end ">
 
                 <div class="d-flex me-2">
-                    {#if !data.liked}
-                    <form method="POST" action="?/like">
-                      <button type="submit" class="btn btn-light btn-left btn-round px-3 py-2 d-flex align-items-center">
-                        <span class="material-symbols-outlined me-2">thumb_up</span>
-                        {data.video.like}
-                      </button>
-                    </form>
-                  {:else}
-                    <form method="POST" action="?/removelike">
-                      <button type="submit" class="btn btn-dark btn-left btn-round px-3 py-2 d-flex align-items-center">
-                        <span class="material-symbols-outlined me-2 liked" >thumb_up</span>
-                        {data.video.like}
-                      </button>
-                    </form>
-                  {/if}
+                  <Like video={data.video} liked={data.liked}/>
 
                   <button class="btn btn-light btn-round btn-right px-3 py-2 d-flex align-items-center">
                     <span class="material-symbols-outlined me-2">thumb_down</span>
@@ -189,12 +167,6 @@
   textarea:focus {
       outline: none;
       border-color: 10px solid black;
-  }
-
-  .btn-left {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    border-right: 1px solid rgb(175, 175, 175);
   }
 
   .btn-right {

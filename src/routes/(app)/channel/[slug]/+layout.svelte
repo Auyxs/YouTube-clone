@@ -1,24 +1,11 @@
 <script>
-	import Sidebar from "$lib/components/Sidebar.svelte";
+	import Subscribe from "$lib/components/buttons/Subscribe.svelte";
+  import Sidebar from "$lib/components/Sidebar.svelte";
   import TagSection from "$lib/components/TagSection.svelte";
   import VideoCard from "$lib/components/VideoCard.svelte";
 
 	let { data, children } = $props();
 </script>
-
-
-<style>
-    .channel-banner {
-      background-image: url('https://assets.tumblr.com/images/default_header/optica_pattern_03.png');
-      background-size: cover;
-      height: 180px;
-      position: relative;
-    }
-    
-    .nav-link:hover {
-      border-bottom: 1px solid black;
-    }
-</style>
 
 <div class="w-100">
 
@@ -32,7 +19,7 @@
         <h1>{data.user.username}</h1>
         <p>@{data.user.username} • {data.user.subscribers} followers • {data.videos.length} videos</p>
         <p>Channel about description</p>
-        <button class="btn btn-dark btn-round subscribe-btn">Subscribe</button>
+        <Subscribe subscribed={data.subscribed} channelId={data.user.id}/>
       </div>
   
     </div>
@@ -49,7 +36,7 @@
             <a class="nav-link p-2" href="/">Videos</a>
           </li>
           <li class="me-3">
-            <a class="nav-link p-2" href="/">Community</a>
+            <a class="nav-link p-2" href="/channel/@{data.user.username}/community">Community</a>
           </li>
           <li class="me-3">
             <a class="nav-link p-2" href="/">About</a>
@@ -61,3 +48,18 @@
 
   {@render children()}
 </div>
+
+
+
+<style>
+  .channel-banner {
+    background-image: url('https://assets.tumblr.com/images/default_header/optica_pattern_03.png');
+    background-size: cover;
+    height: 180px;
+    position: relative;
+  }
+  
+  .nav-link:hover {
+    border-bottom: 1px solid black;
+  }
+</style>

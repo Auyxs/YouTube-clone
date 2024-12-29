@@ -1,8 +1,6 @@
 <script>
   import Navbar from '$lib/components/Navbar.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
-  import 'bootstrap/dist/css/bootstrap.min.css';
-  import '../../app.css';
 
   let { data, children } = $props();
 </script>

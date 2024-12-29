@@ -1,4 +1,5 @@
 <script>
+  import SignIn from "./buttons/signIn.svelte";
   export let logged_user = null;
 
   let isDropdownOpen = false; 
@@ -23,7 +24,7 @@
     </a>
   </div>
 
-  <form class="col-6">
+  <form class="col-2 col-sm-4 col-md-6">
     <div class="d-flex">
       <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
       <button class="btn search-btn d-flex align-items-center justify-content-center" type="submit">
@@ -63,7 +64,7 @@
           </div>
           
           <div class="px-3 py-2 d-flex align-items-center">
-            <form action="/logout" method="POST">
+            <form action="/api/logout" method="POST">
               <button type="submit" class="d-flex align-items-center bg-transparent border-0">
                   <span class="material-symbols-outlined me-4">
                       logout
@@ -80,14 +81,7 @@
     </div>
 
   {:else}
-      <div>
-        <a href="/login" class="btn btn-round btn-light border d-flex align-items-center me-2" style="color: rgb(66, 139, 255);">
-          <span class="material-symbols-outlined me-2">
-            account_circle
-          </span>
-          Sign in
-        </a>
-      </div>
+    <SignIn />
   {/if}
 
 </div>

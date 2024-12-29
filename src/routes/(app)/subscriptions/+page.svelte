@@ -2,6 +2,7 @@
     import TagSection from '$lib/components/TagSection.svelte';
     import VideoCard from '$lib/components/VideoCard.svelte';
     import Sidebar from '$lib/components/Sidebar.svelte';
+    import SignIn from '$lib/components/buttons/signIn.svelte';
   
     let {data} = $props();
 </script>
@@ -15,14 +16,7 @@
                     <h4>Don’t miss new videos</h4>
                     <p>Sign in to see updates from your favorite YouTube channels</p>
                     
-                    <button class="btn btn-round btn-light border">
-                        <a href="/login" class="text-decoration-none d-flex align-items-center me-2" style="color: rgb(66, 139, 255);">
-                            <span class="material-symbols-outlined me-2">
-                            account_circle
-                            </span>
-                            Sign in
-                        </a>
-                    </button>
+                    <SignIn />
             
                 </div>
     
