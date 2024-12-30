@@ -14,8 +14,8 @@ export async function load({ params, locals }) {
   let liked = false;
   let subscribed = false;
   if (locals.user !== null) {
-    liked = hasLiked(locals.user.id, slug);
-    subscribed = isSubscibed(locals.user.id, video.user.id)
+    liked = await hasLiked(locals.user.id, slug);
+    subscribed = await isSubscibed(locals.user.id, video.user.id)
   }
 
   return {

@@ -6,7 +6,6 @@ export const POST = async ({ locals, request }) => {
     if (locals.user != null) {
         const formData = await request.formData();
         const channelId = formData.get('channelId');
-        console.log(locals.user, channelId);
         await Subscribe(locals.user.id, channelId); 
         return redirect(302, '/');
     } else {
