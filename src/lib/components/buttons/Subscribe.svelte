@@ -1,16 +1,21 @@
 <script>
     export let subscribed;
-    export let channelId; 
+    export let channelId;
+
+    async function handleFormSubmission(event, url) {
+        event.preventDefault(); 
+        const formData = new FormData(event.target);
+        await fetch(url, {
+            method: 'POST',
+            body: formData,
+        });
+        subscribed = !subscribed; 
+    }
 </script>
 
-{#if !subscribed}
-    <form action="/api/subscribe" method="POST">
-        <input type="hidden" name="channelId" value={channelId} />
-        <button type="submit" class="btn btn-round btn-dark px-3 py-2" style="font-size: 14px;">Subscribe</button>
-    </form>
-{:else}
-    <form action="/api/unsubscribe" method="POST">
-        <input type="hidden" name="channelId" value={channelId} />
-        <button class="btn btn-round btn-light px-3 py-2" style="font-size: 14px;">Subscribed</button>
-    </form>            
-{/if}
+<form on:submit|preventDefault={(event) => handleFormSubmission(event, subscribed === false ? '/api/subscribe' : '/api/unsubscribe')}>
+    <input type="hidden" name="channelId" value={channelId} />
+    <button type="submit" class="btn btn-round {subscribed === false ? 'btn-dark' : 'btn-light'} px-3 py-2" style="font-size: 14px;">
+        {subscribed === false ? 'Subscribe' : 'Subscribed'}
+    </button>
+</form>

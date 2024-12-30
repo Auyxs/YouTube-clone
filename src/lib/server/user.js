@@ -11,9 +11,9 @@ export async function getUsers() {
   return cachedUsers;
 }
 
-export async function getUserById(user_id) {
+export async function getUserById(userId) {
     const users = await getUsers();
-    const user = users.find(u => u.id === user_id);
+    const user = users.find(u => u.id === userId);
     const subs = await getSubscribers(user.id);
     return {id: user.id, username: user.username, image: user.image, subscribers: subs }
 }

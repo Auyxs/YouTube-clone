@@ -1,30 +1,30 @@
 import { readFromFile, writeOnFile } from './fileIO';
 const SUBSCRIBE_DATA_FILE = 'src/lib/data/subscription.json'
 
-export async function isSubscibed(userId, channelUserId){
+export async function isSubscribed(userId, channelId){
     const subData = await readFromFile(SUBSCRIBE_DATA_FILE);
-    return subData.find(sub => sub.user_id == channelUserId && sub.subscribed_user_id == userId) !== undefined;
+    return subData.find(sub => sub.userId == userId && sub.channelId == channelId) !== undefined;
 }
 
-export async function getSubscribers(userId){
+export async function getSubscribers(channelId){
     const subData = await readFromFile(SUBSCRIBE_DATA_FILE);
-    return subData.filter(sub => sub.user_id == userId).length;
+    return subData.filter(sub => sub.channelId == channelId).length;
 }
 
 export async function getSubscriptions(userId) {
     const subData = await readFromFile(SUBSCRIBE_DATA_FILE);
-    return subData.filter(sub => sub.subscribed_user_id == +userId);
+    return subData.filter(sub => sub.userId == +userId);
 }
 
-export async function Subscribe(userId, channelUserId){
+export async function Subscribe(userId, channelId){
     const subData = await readFromFile(SUBSCRIBE_DATA_FILE);
-    const newSub = {user_id: +channelUserId, subscribed_user_id: +userId};
+    const newSub = {userId: +userId, channelId: +channelId};
     subData.push(newSub);
     await writeOnFile(SUBSCRIBE_DATA_FILE, subData);
 }
 
-export async function Unsubscribe(userId, channelUserId){
+export async function Unsubscribe(userId, channelId){
     const subData = await readFromFile(SUBSCRIBE_DATA_FILE);
-    const updatedSubs = subData.filter(sub => sub.user_id !== +channelUserId || sub.subscribed_user_id !== +userId);
+    const updatedSubs = subData.filter(sub => sub.userId !== +userId || sub.channelId !== +channelId);
     await writeOnFile(SUBSCRIBE_DATA_FILE, updatedSubs)
 }

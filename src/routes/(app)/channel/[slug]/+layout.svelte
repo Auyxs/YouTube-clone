@@ -10,10 +10,10 @@
 <div class="w-100">
 
 <section class="channel-header m-0 p-0 m-md-5 p-md-3 mt-0 mb-0 pt-0 pb-0">
-    <div class="channel-banner d-flex align-items-end rounded m-3 mt-0">
+    <div class="channel-banner d-flex align-items-end rounded mx-3 mt-0">
     </div>
   
-    <div class=" d-flex m-0 m-md-3 mt-0 mb-0">
+    <div class=" d-flex m-0 mt-0 mb-0">
       <img src="{data.user.image}" alt="Channel Avatar" class="profile rounded-circle m-3" style="height: 150px; width: auto;">
       <div class="m-4">
         <h1>{data.user.username}</h1>

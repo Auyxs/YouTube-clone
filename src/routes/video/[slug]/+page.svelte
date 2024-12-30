@@ -7,14 +7,6 @@
   let {data} = $props();
   let writingComment = $state(false);
 
-  const handleSubmitComment = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    await fetch('?/addcomment', {
-      method: 'POST',
-      body: formData
-    });
-  };
 
 </script>
 
@@ -93,7 +85,7 @@
                 </div>
 
                 <div class="container w-100">
-                    <form onsubmit={handleSubmitComment}>
+                    <form action="?/addcomment" method="POST">
                       <textarea class="w-100" rows="1" name="comment" id="" placeholder="Add a comment..." onclick={() => writingComment = true}></textarea>
 
                       {#if writingComment}

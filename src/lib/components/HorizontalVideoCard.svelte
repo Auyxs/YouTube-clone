@@ -3,7 +3,7 @@
 </script>
 
 <div class="d-flex flex-row mb-2 p-0 m-0">
-    <a href="/video/{video.Id}" class="video-link">
+    <a href="/video/{video.id}" class="video-link">
         <div class="position-relative" style="width: 100%;">
             <img src="https://img.youtube.com/vi/{video.URL}/hqdefault.jpg" alt="{video.title} thumbnail" class="rounded-3" style="width: 160px; height: 90px; object-fit: cover;" />
             <div class="video-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center text-white">
