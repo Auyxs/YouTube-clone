@@ -18,11 +18,11 @@
     </a>
     
 
-        <div class="d-flex card-body container-fluid">
+        <div class="d-flex card-body container-fluid px-0">
             {#if currentRoute !== "/channel"}
-                <div class="col-2">
+                <div class="me-3">
                     <a href="/channel/@{video.user.username}">
-                        <img src={video.user.image || ''} alt="User" class="rounded-circle w-75 profile" />
+                        <img src={video.user.image || ''} alt="User" class="rounded-circle profile" style="width: 40px;"/>
                     </a>
                 </div>
             {/if}

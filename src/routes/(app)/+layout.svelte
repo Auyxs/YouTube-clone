@@ -12,9 +12,20 @@
       <Sidebar logged_user={data.logged_user}/> 
     </div>
 
-    <div class="w-100" style="margin-left: 250px;">
+    <div class="responsive-container w-100" >
       {@render children()}
     </div>
 
   </div>
 </div>
+
+<style>
+  .responsive-container {
+    margin-left: 250px;
+  }
+  @media screen and (max-width: 1000px) {
+  .responsive-container {
+    margin-left: 0;
+  }
+}
+</style>
