@@ -1,4 +1,5 @@
 import { readFromFile, writeOnFile } from './fileIO';
+import { getUserById } from './user';
 const SUBSCRIBE_DATA_FILE = 'src/lib/data/subscription.json'
 
 export async function isSubscribed(userId, channelId){
@@ -13,7 +14,9 @@ export async function getSubscribers(channelId){
 
 export async function getSubscriptions(userId) {
     const subData = await readFromFile(SUBSCRIBE_DATA_FILE);
-    return subData.filter(sub => sub.userId == +userId);
+    const subs = subData.filter(sub => sub.userId == +userId);
+
+    return await Promise.all(subs.map(s => getUserById(s.channelId)));
 }
 
 export async function Subscribe(userId, channelId){

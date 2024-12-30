@@ -9,7 +9,7 @@
   <Navbar logged_user={data.logged_user}/>
   <div class="d-flex">
     <div class="pt-5"> 
-      <Sidebar logged_user={data.logged_user}/> 
+      <Sidebar logged_user={data.logged_user} subscriptions={data.subscriptions}/> 
     </div>
 
     <div class="responsive-container w-100" >

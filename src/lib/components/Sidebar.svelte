@@ -1,10 +1,12 @@
 <script>
     import SignIn from "./buttons/signIn.svelte";
 
-  export let logged_user = null;
+  export let logged_user;
+  export let subscriptions;
+  console.log(subscriptions)
 </script>
 
-  <div class="flex-shrink-0 p-3 sidebar d-none d-lg-block bg-white position-fixed" style="z-index: 100;">
+  <div class="flex-shrink-0 p-3 pb-5 sidebar d-none d-lg-block bg-white position-fixed overflow-y-auto" style="z-index: 100;">
     <ul class="nav d-flex flex-column ">
       <li class="nav-item">
         <a href="/" class="nav-link active">
@@ -54,7 +56,23 @@
       {/if}
 
       <hr>
-  
+      {#if logged_user != null}
+      <li class="nav-item mx-3">
+        <h6>Subscriptions</h6>
+      </li>
+        {#each subscriptions as channel}
+        <li class="nav-item">
+          <a class="nav-link" href="/channel/@{channel.username}">
+
+              <img src="{channel.image}" alt="" class="rounded-circle profile me-3" style="width: 25px; height: 25px;">
+              <p class="mb-0">{channel.username}</p>
+
+          </a>
+        </li>
+        {/each}
+        <hr>
+      {/if}
+
       <li class="nav-item">
         <a href="/" class="nav-link">
           <span class="material-symbols-outlined me-4">settings</span>
