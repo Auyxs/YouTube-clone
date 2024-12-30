@@ -1,38 +1,26 @@
-# sv
+# YouTube-Clone
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+![License](https://img.shields.io/badge/license-MIT-blue.svg) ![npm version](https://img.shields.io/npm/v/svelte.svg)
 
-## Creating a project
+This is a simplified **YouTube clone** built with **SvelteKit**, **JavaScript**, and **Bootstrap**. It replicates key YouTube functionalities such as:
+- Video playback
+- User subscriptions
+- Likes
+- Comments
+- Login
+- Playlists
 
-If you're seeing this, you've probably already done this step. Congrats!
+The app operates **without a backend database**, relying on **local storage** to save user data like subscriptions, liked videos, and comments. User profiles are dynamically fetched from the **DummyJSON** API, allowing users to log in with any credentials retrieved from `DummyJSON/users`.
 
+Additionally, mock data used throughout the app is generated using **Mockaroo**, ensuring a realistic and diverse dataset for testing and functionality.
+
+### Video Playback
+In this project, the videos are embedded using **YouTube's iframe embed links**. The videos are **manually selected** from YouTube and then **shuffled** using **Mockaroo** to simulate a dynamic video experience. The application does not host videos but fetches them from YouTube, providing a smooth and real-world-like video playback experience.
+
+
+## Installation
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
