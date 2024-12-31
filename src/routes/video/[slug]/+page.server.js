@@ -9,7 +9,7 @@ export async function load({ params, locals }) {
   
   const video = await getVideoById(slug);    
   const comments = await getVideoComments(video.id);
-  const suggestedVideos = await getVideos(20);
+  const suggestedVideos = await getVideos([], 20);
 
   let liked = false;
   let subscribed = false;

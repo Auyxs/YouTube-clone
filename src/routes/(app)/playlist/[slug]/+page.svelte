@@ -25,7 +25,7 @@
                
         
             <div class="mt-3">
-                <h3>Liked videos</h3>
+                <h3>{data.playlistName}</h3>
                 <div class="mt-4" >
                     <h6 style="font-size: 14px;">by {data.logged_user.username}</h6>
                     <p style="font-size: 12px;">playlist with {data.videos.length} videos</p>
@@ -51,8 +51,8 @@
                         {/each}
                     </div>
                 {:else}
-                <div class="p-5">
-                    <h6 class="text-center"> no liked videos </h6>
+                <div class="p-5 mt-5">
+                    <h6 class="text-center"> no videos found inside this playlist  </h6>
                 </div>
             {/if}
         </div>

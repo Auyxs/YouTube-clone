@@ -1,9 +1,21 @@
 import { getUserLikes } from '$lib/server/like.js'
+import { getPlaylistVideos } from '$lib/server/playlist.js'
 import { getLikedVideos } from '$lib/server/video.js'
 
-export async function load({locals}) {
-    const likes = await getUserLikes(locals.user.id)
-    const videos = await getLikedVideos(likes)
-
-    return { videos: videos }
+export async function load({params, locals}) {
+    let videos = [];
+    const { slug } = params;
+    const playlistName = slug.replace("_", " ");
+    if (locals.user) {
+        try {
+            videos = await getPlaylistVideos(locals.user.id, playlistName);
+        } catch {
+            console.log("playlist not found")
+        }
+        
+    }
+    return { 
+        videos: videos,
+        playlistName
+    }
 }

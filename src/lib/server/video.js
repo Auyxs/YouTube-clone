@@ -3,12 +3,18 @@ import { getLikes } from './like';
 import { getSubscriptions } from './subscription';
 import { getUsers, getUserById } from './user';
 
+async function selectRandomVideos(limit) {
+    const videoIds = new Set();
+    while (videoIds.size < limit) {
+        const randomIndex = Math.floor(Math.random() * videosData.length);
+        videoIds.add(videosData[randomIndex].id);
+    }
+    return Array.from(videoIds); 
+}
 
-export async function getVideos(limit = 12) {
-    const start = Math.floor(Math.random() * (videosData.length - limit - 1));
-    const selectedVideos = videosData.slice(start, start + limit);
-
-    return await Promise.all(selectedVideos.map((video) => getVideoById(video.id)));
+export async function getVideos(videoIds = [], limit = 12) {
+    if (videoIds.length == 0) videoIds = await selectRandomVideos(limit);
+    return await Promise.all(videoIds.map((id) => getVideoById(id)));
 }
 
 export async function getVideoById(id) {
@@ -36,14 +42,16 @@ export async function getLikedVideos(likes) {
 
 export async function getSubscribedVideos(userId, limit = 12) {
     const subscribed = await getSubscriptions(userId);
-    const allVideos = await Promise.all(
-        subscribed.map(async sub => await getUserVideos(sub.id))
-    );
+    const videoIds = [];
+    for (let sub of subscribed) {
+        const userVideos = await getUserVideos(sub.id); 
+        userVideos.forEach(video => videoIds.push(video.id)); 
+    }
 
-    const flatVideos = allVideos.flat();
-    flatVideos.sort((a, b) => a.title.localeCompare(b.title));
+    if (videoIds.length > limit) {
+        videoIds.sort(() => Math.random() - 0.5); 
+        videoIds.splice(limit); 
+    }
 
-    const start = Math.floor(Math.random() * Math.max(1, flatVideos.length - limit));
-    const selectedVideos = flatVideos.slice(start, start + limit);
-    return await Promise.all(selectedVideos.map(video => getVideoById(video.id)))
+    return await getVideos(videoIds, limit);
 }

@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import { readFromFile, writeOnFile } from './fileIO';
+import { getVideos } from './video';
 
 const PLAYLIST_DATA_FILE = 'src/lib/data/playlist.json';
 
@@ -11,13 +12,13 @@ export async function getPlaylistVideos(userId, playlistName) {
     const playlistData = await readFromFile(PLAYLIST_DATA_FILE);
     const playlist = await findPlaylist(playlistData, userId, playlistName);
     if (!playlist) throw new Error(`Playlist "${playlistName}" not found for user ${userId}`);
-    return playlist.videos;
+    return await getVideos(playlist.videos);
 }
 
 export async function addToPlaylist(videoId, userId, playlistName) {
     const playlistData = await readFromFile(PLAYLIST_DATA_FILE);
     const playlist = await findPlaylist(playlistData, userId, playlistName);
-    if (!playlist) throw new Error(`Playlist "${playlistName}" not found for user ${userId}`);
+    if (!playlist) await createPlaylist(userId, playlistName)
     if (playlist.videos.includes(videoId)) throw new Error(`Video ${videoId} already exists in playlist "${playlistName}"`);
     playlist.videos.push(videoId);
     await writeOnFile(PLAYLIST_DATA_FILE, playlistData);
