@@ -37,7 +37,7 @@ export async function getLikedVideos(likes) {
 export async function getSubscribedVideos(userId, limit = 12) {
     const subscribed = await getSubscriptions(userId);
     const allVideos = await Promise.all(
-        subscribed.map(async sub => await getUserVideos(sub.channelId))
+        subscribed.map(async sub => await getUserVideos(sub.id))
     );
 
     const flatVideos = allVideos.flat();
@@ -45,6 +45,5 @@ export async function getSubscribedVideos(userId, limit = 12) {
 
     const start = Math.floor(Math.random() * Math.max(1, flatVideos.length - limit));
     const selectedVideos = flatVideos.slice(start, start + limit);
-
     return await Promise.all(selectedVideos.map(video => getVideoById(video.id)))
 }

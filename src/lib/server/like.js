@@ -1,5 +1,5 @@
 import fs from 'fs/promises';import { readFromFile, writeOnFile } from './fileIO'; 
-import { addToPlaylist } from './playlist';
+import { addToPlaylist, removeFromPlaylist } from './playlist';
 
 const LIKE_DATA_FILE = 'src/lib/data/like.json';
 
@@ -26,6 +26,7 @@ export async function removeLike(userId, videoId) {
     const likeData = await readFromFile(LIKE_DATA_FILE);
     if (!likeData.find(like => like.userId == userId && like.videoId == videoId)) return;
     const updatedLikes = likeData.filter(like => like.userId !== +userId || like.videoId !== +videoId);
+    await removeFromPlaylist(videoId, userId, 'liked');
     await writeOnFile(LIKE_DATA_FILE, updatedLikes);
 }
 
