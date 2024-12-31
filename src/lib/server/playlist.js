@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import { readFromFile, writeOnFile } from './fileIO';
-import { getVideos } from './video';
+import { getVideoById, getVideos } from './video';
 
 const PLAYLIST_DATA_FILE = 'src/lib/data/playlist.json';
 
@@ -12,7 +12,8 @@ export async function getPlaylistVideos(userId, playlistName) {
     const playlistData = await readFromFile(PLAYLIST_DATA_FILE);
     const playlist = await findPlaylist(playlistData, userId, playlistName);
     if (!playlist) throw new Error(`Playlist "${playlistName}" not found for user ${userId}`);
-    return await getVideos(playlist.videos);
+    if (playlist.videos > 0) return await getVideos(playlist.videos);
+    return []
 }
 
 export async function addToPlaylist(videoId, userId, playlistName) {
@@ -41,4 +42,21 @@ export async function createPlaylist(userId, playlistName) {
     const newPlaylist = { userId, name: playlistName, videos: [] };
     playlistData.push(newPlaylist);
     await writeOnFile(PLAYLIST_DATA_FILE, playlistData);
+}
+
+export async function getAllPlaylist(userId) {
+    const playlistData = await readFromFile(PLAYLIST_DATA_FILE);
+    const playlists = playlistData.filter(pl => pl.userId == userId);
+
+    return Promise.all(playlists.map(async pl => {
+        let cover = '';
+        if (pl.videos.length > 0) {
+            const video = await getVideoById(pl.videos[0]);
+            cover = video.URL;
+        }
+        return {
+            ...pl,
+            cover: cover
+        };
+    }));
 }

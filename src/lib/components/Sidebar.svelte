@@ -32,9 +32,9 @@
       </li>
 
       <li class="nav-item">
-        <a href="/" class="nav-link">
+        <a href="/playlists" class="nav-link">
           <span class="material-symbols-outlined me-4">playlist_play</span>
-          Playlist
+          Playlists
         </a>
       </li>
 

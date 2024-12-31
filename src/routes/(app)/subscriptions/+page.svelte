@@ -1,7 +1,5 @@
 <script>
-    import TagSection from '$lib/components/TagSection.svelte';
     import VideoCard from '$lib/components/VideoCard.svelte';
-    import Sidebar from '$lib/components/Sidebar.svelte';
     import SignIn from '$lib/components/buttons/signIn.svelte';
   
     let {data} = $props();

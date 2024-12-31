@@ -5,7 +5,7 @@
 
 <div class="card">
     <a href="/video/{video.id}" class="video-link">
-        <div class="position-relative" style="width: 100%; padding-bottom: 50%;">
+        <div class="position-relative" style="width: 100%;  padding-bottom: 56.25%;">
             <img src="https://img.youtube.com/vi/{video.URL}/hqdefault.jpg" 
                 alt="{video.title} thumbnail" 
                 class="card-img-top rounded-3 position-absolute" 

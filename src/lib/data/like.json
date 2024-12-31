@@ -1,21 +1,5 @@
 [
   {
-    "userId": 1,
-    "videoId": 233
-  },
-  {
-    "userId": 1,
-    "videoId": 312
-  },
-  {
-    "userId": 1,
-    "videoId": 36
-  },
-  {
-    "userId": 1,
-    "videoId": 84
-  },
-  {
     "userId": 2,
     "videoId": 213
   },
@@ -26,5 +10,9 @@
   {
     "userId": 1,
     "videoId": 63
+  },
+  {
+    "userId": 2,
+    "videoId": 334
   }
 ]
