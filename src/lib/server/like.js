@@ -18,7 +18,7 @@ export async function addLike(userId, videoId) {
     if (likeData.find(like => like.userId == userId && like.videoId == videoId)) return;
     const newLike = { userId: +userId, videoId: +videoId };
     likeData.push(newLike);
-    await addToPlaylist(videoId, userId, 'liked');
+    await addToPlaylist(videoId, userId, 'Liked videos');
     await writeOnFile(LIKE_DATA_FILE, likeData);
 }
 
@@ -26,7 +26,7 @@ export async function removeLike(userId, videoId) {
     const likeData = await readFromFile(LIKE_DATA_FILE);
     if (!likeData.find(like => like.userId == userId && like.videoId == videoId)) return;
     const updatedLikes = likeData.filter(like => like.userId !== +userId || like.videoId !== +videoId);
-    await removeFromPlaylist(videoId, userId, 'liked');
+    await removeFromPlaylist(videoId, userId, 'Liked videos');
     await writeOnFile(LIKE_DATA_FILE, updatedLikes);
 }
 

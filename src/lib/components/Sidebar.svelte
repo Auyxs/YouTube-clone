@@ -39,7 +39,7 @@
       </li>
   
       <li class="nav-item">
-        <a href="/liked" class="nav-link">
+        <a href="/playlist/like" class="nav-link">
           <span class="material-symbols-outlined me-4">thumb_up</span>
           Liked videos
         </a>
