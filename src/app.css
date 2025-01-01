@@ -14,7 +14,9 @@ body {
     font-size: 14px;
     font-weight: 500;
 }
-
+.btn-light {
+    background-color: rgb(235, 235, 235);
+}
 .card {
     border: none;
 }

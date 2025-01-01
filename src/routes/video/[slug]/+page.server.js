@@ -1,5 +1,6 @@
 import { addComment, getVideoComments } from '$lib/server/comment.js';
 import { addLike, hasLiked, removeLike } from '$lib/server/like.js';
+import { getAllPlaylist } from '$lib/server/playlist.js';
 import { isSubscribed, Subscribe, Unsubscribe } from '$lib/server/subscription.js';
 import { getVideoById, getVideos } from '$lib/server/video.js';
 import { redirect } from '@sveltejs/kit';
@@ -13,9 +14,11 @@ export async function load({ params, locals }) {
 
   let liked = false;
   let subscribed = false;
+  let playlists = [];
   if (locals.user !== null) {
     liked = await hasLiked(locals.user.id, slug);
-    subscribed = await isSubscribed(locals.user.id, video.user.id)
+    subscribed = await isSubscribed(locals.user.id, video.user.id);
+    playlists = await getAllPlaylist(locals.user.id);
   }
 
   return {
@@ -23,7 +26,8 @@ export async function load({ params, locals }) {
     subscribed,
     video,
     comments,
-    suggestedVideos
+    suggestedVideos,
+    playlists
   };
 }
 
@@ -55,9 +59,9 @@ export const actions = {
     
         if (commentText) {
           await addComment(locals.user.id, slug, commentText);
-        } else {
-          redirect('302', '/login')
-        }
+        } 
+      } else {
+        redirect('302', '/login')
       }
     }
 }

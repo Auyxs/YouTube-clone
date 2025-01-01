@@ -2,13 +2,30 @@
   import Like from "$lib/components/buttons/Like.svelte";
   import Subscribe from "$lib/components/buttons/Subscribe.svelte";
   import HorizontalVideoCard from "$lib/components/HorizontalVideoCard.svelte";
+  import SaveMenu from "$lib/components/SaveMenu.svelte";
 	import TagSection from "$lib/components/TagSection.svelte";
 
   let {data} = $props();
   let writingComment = $state(false);
+  let showSaveMenu = $state(false);
 
-
+  function closeSaveMenu(event) {
+    console.log("ciao");
+    if (event.target.closest(".save-menu") === null) {
+      showSaveMenu = false;
+    }
+  }
 </script>
+
+{#if showSaveMenu}
+  <div class="position-fixed overlay" onclick={closeSaveMenu}>
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="save-menu">
+        <SaveMenu playlists={data.playlists} videoId={data.video.id} />
+      </div>
+    </div>
+  </div>
+{/if}
 
 <div class="container-fluid m-3 ms-md-0 ms-xxl-4 pt-2">
     <div class="d-flex flex-row ">
@@ -50,15 +67,15 @@
                     <span class="material-symbols-outlined me-2">thumb_down</span>
                   </button>
                 </div>
-
                 <button class="btn btn-light btn-round px-3 py-2 d-flex align-items-center me-2">
-                  <span class="material-symbols-outlined me-2">share</span>
-                  Share
-                </button>
-                <button class="btn btn-light btn-round px-3 py-2 d-flex align-items-center">
                   <span class="material-symbols-outlined me-2">file_download</span>
                   Download
                 </button>
+                <button onclick={() => showSaveMenu = true} class="btn btn-light btn-round px-3 py-2 d-flex align-items-center">
+                  <span class="material-symbols-outlined me-2">bookmark</span>
+                  Save
+                </button>
+             
               </div>
             </div>
   
@@ -136,6 +153,13 @@
   </div>
 
 <style>
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.4); 
+        height: 100vh; 
+        width: 100vw;
+        z-index: 100;
+    }
+    
   textarea {
     --padding: 10px;
     padding-left: 0;

@@ -12,8 +12,8 @@ export async function getPlaylistVideos(userId, playlistName) {
     const playlistData = await readFromFile(PLAYLIST_DATA_FILE);
     const playlist = await findPlaylist(playlistData, userId, playlistName);
     if (!playlist) throw new Error(`Playlist "${playlistName}" not found for user ${userId}`);
-    if (playlist.videos > 0) return await getVideos(playlist.videos);
-    return []
+    if (playlist.videos.length > 0) return await getVideos(playlist.videos);
+    else return []
 }
 
 export async function addToPlaylist(videoId, userId, playlistName) {
