@@ -1,6 +1,6 @@
 import { addComment, getVideoComments } from '$lib/server/comment.js';
 import { addLike, hasLiked, removeLike } from '$lib/server/like.js';
-import { getAllPlaylist } from '$lib/server/playlist.js';
+import { addToPlaylist, getAllPlaylist, removeFromPlaylist } from '$lib/server/playlist.js';
 import { isSubscribed, Subscribe, Unsubscribe } from '$lib/server/subscription.js';
 import { getVideoById, getVideos } from '$lib/server/video.js';
 import { redirect } from '@sveltejs/kit';
@@ -63,5 +63,18 @@ export const actions = {
       } else {
         redirect('302', '/login')
       }
+    },
+    updatePlaylist: async ({ request, locals }) => {
+      const data = await request.formData();
+      const playlistName = data.get("playlistName");
+      const videoId = data.get("videoId");
+      const action = data.get("action"); 
+      
+      if (action === "add") {
+          await addToPlaylist(videoId, locals.user.id, playlistName);
+      } else if (action === "remove") {
+          await removeFromPlaylist(videoId, locals.user.id, playlistName);
+      }
+      return { success: true };
     }
 }

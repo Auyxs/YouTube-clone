@@ -8,20 +8,16 @@
   let {data} = $props();
   let writingComment = $state(false);
   let showSaveMenu = $state(false);
-
-  function closeSaveMenu(event) {
-    console.log("ciao");
-    if (event.target.closest(".save-menu") === null) {
-      showSaveMenu = false;
-    }
-  }
 </script>
 
 {#if showSaveMenu}
-  <div class="position-fixed overlay" onclick={closeSaveMenu}>
+  <div class="position-fixed overlay" >
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="save-menu">
-        <SaveMenu playlists={data.playlists} videoId={data.video.id} />
+        <button onclick={() => showSaveMenu = false} class="border-0 bg-transparent text-white"> 
+          <span class="material-symbols-outlined"> close </span>
+        </button>
+        <SaveMenu playlists={data.playlists} videoId={data.video.id}/>
       </div>
     </div>
   </div>
