@@ -1,8 +1,7 @@
 <script>
   import SignIn from "./buttons/signIn.svelte";
-  export let logged_user = null;
-
-  let isDropdownOpen = false; 
+  let {logged_user} = $props();
+  let isDropdownOpen = $state(false); 
 
   const handleDropdownFocusLoss = ({ relatedTarget, currentTarget }) => {
     if (relatedTarget instanceof HTMLElement && currentTarget.contains(relatedTarget)) return 

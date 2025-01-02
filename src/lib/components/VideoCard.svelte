@@ -1,6 +1,5 @@
 <script>
-    export let video = {}; 
-    export let currentRoute = ""; 
+    let {video, currentRoute} = $props();
 </script>
 
 <div class="card">

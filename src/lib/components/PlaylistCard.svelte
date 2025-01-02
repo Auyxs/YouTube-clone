@@ -1,5 +1,5 @@
 <script>
-    export let playlist = {};
+    let {playlist} = $props();
 </script>
 
 <div class="card">

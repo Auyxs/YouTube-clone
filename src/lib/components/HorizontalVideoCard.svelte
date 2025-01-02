@@ -1,5 +1,5 @@
 <script>
-    export let video = {};
+    let {video} = $props();
 </script>
 
 <div class="d-flex flex-row mb-2 p-0 m-0">

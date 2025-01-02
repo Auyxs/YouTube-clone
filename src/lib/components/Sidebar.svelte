@@ -1,7 +1,6 @@
 <script>
   import SignIn from "./buttons/signIn.svelte";
-  export let logged_user;
-  export let subscriptions;
+  let {logged_user, subscriptions} = $props();
 </script>
 
   <div class="flex-shrink-0 p-3 pb-5 sidebar d-none d-lg-block bg-white position-fixed overflow-y-auto" style="z-index: 100;">

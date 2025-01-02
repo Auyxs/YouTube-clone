@@ -1,7 +1,5 @@
 <script>
-    export let comments;
-    export let logged_user;
-
+    let {comments, logged_user} = $props();
     let writingComment = false;
 </script>
 

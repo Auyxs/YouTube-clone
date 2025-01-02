@@ -1,7 +1,5 @@
 <script>
-
-    export let playlists;
-    export let videoId;
+    let {playlists, videoId} = $props();
 
     const isInPlaylist = (playlist) => {
         return playlist.videos.includes(String(videoId));
@@ -32,7 +30,7 @@
                 value="" 
                 id="watch-later" 
                 checked={isInPlaylist(playlists.find(p => p.name === "Watch later"))}
-                on:change={(event) => handleCheckboxChange(playlists.find(p => p.name === "Watch later"), event)}
+                onchange={(event) => handleCheckboxChange(playlists.find(p => p.name === "Watch later"), event)}
             />
             <label class="form-check-label mb-0" for="watch-later">Watch later</label>
         </div>
@@ -46,7 +44,7 @@
                     value="" 
                     id="{playlist.name}" 
                     checked={isInPlaylist(playlist)}
-                    on:change={(event) => handleCheckboxChange(playlist, event)}
+                    onchange={(event) => handleCheckboxChange(playlist, event)}
                 />
                 <label class="form-check-label mb-0" for="{playlist.name}">{playlist.name}</label>
             </div>

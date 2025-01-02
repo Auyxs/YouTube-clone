@@ -1,5 +1,5 @@
 <script>
-    export let tags = ["Music", "Animation", "Games", "News"]
+    let {tags = ["Music", "Animation", "Games", "News"]} = $props();
 </script>
 
 <button class="btn me-2 tag tag-active">All</button>

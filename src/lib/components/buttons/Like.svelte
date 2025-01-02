@@ -1,6 +1,5 @@
 <script>    
-    export let video;
-    export let liked;
+    let {video, liked} = $props();
 </script>
 
 <form action={liked ? '?/removelike' : '?/like'} method="POST">
