@@ -21,3 +21,9 @@ export async function addComment(userId, videoId, body){
     commentData.push(newCom);
     await writeOnFile(COMMENT_DATA_FILE, commentData)
 }
+
+export async function deleteComment(userId, videoId, body) {    
+    const commentData = await readFromFile(COMMENT_DATA_FILE);
+    const updatedCommentData = commentData.filter(c => c.userId != userId || c.videoId != videoId || c.body != body)
+    await writeOnFile(COMMENT_DATA_FILE, updatedCommentData)
+}
