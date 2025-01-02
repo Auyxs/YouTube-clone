@@ -13,9 +13,9 @@
                     <span class="material-symbols-outlined" style="font-size: 10em;">subscriptions</span>
                     <h4>Don’t miss new videos</h4>
                     <p>Sign in to see updates from your favorite YouTube channels</p>
-                    
-                    <SignIn />
-            
+                    <div class="d-flex justify-content-center">
+                        <SignIn />
+                    </div>
                 </div>
     
             </div>
