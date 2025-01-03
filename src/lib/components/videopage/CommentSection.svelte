@@ -1,12 +1,12 @@
 <script>
     let {comments, logged_user} = $props();
-    let writingComment = false;
+    let writingComment = $state(false);
 </script>
 
 <div class="col-lg-12 pt-4">
     <h5>{comments.length} Comments</h5>
 
-    <div class="container d-flex p-2 mb-4 mt-3">
+    <div class="container d-flex m-1 p-2 mb-4 mt-3">
         <div class="me-2">
           {#if logged_user != null}
             <img src="{logged_user.image}" alt="" class="profile rounded-circle" style="width: 40px;">
