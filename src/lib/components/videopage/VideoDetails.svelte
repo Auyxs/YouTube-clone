@@ -2,7 +2,7 @@
   import Like from "../buttons/Like.svelte";
   import Subscribe from "../buttons/Subscribe.svelte";
 
-  let { video, liked, subscribed, showmenu } = $props();
+  let { video, liked, subscribed, showmenu, logged_user } = $props();
   let subs = $state(video.user.subscribers);
 </script>
 
@@ -38,14 +38,20 @@
         </p>
       </div>
       <div class="mx-4">
-        <Subscribe {subscribed} channelId={video.user.id} incresesub={() => subs++} decreasesub={() => subs--} />
+        <Subscribe
+          {subscribed}
+          logged_user={logged_user}
+          channelId={video.user.id}
+          incresesub={() => subs++}
+          decreasesub={() => subs--}
+        />
       </div>
     </div>
 
     <div class="col-6">
       <div class="d-flex flex-row justify-content-end">
         <div class="d-flex me-2">
-          <Like {video} {liked} />
+          <Like {video} {liked} logged_user={logged_user} />
 
           <button
             class="btn btn-light btn-round btn-right px-3 py-2 d-flex align-items-center"

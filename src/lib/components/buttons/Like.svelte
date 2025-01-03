@@ -1,8 +1,9 @@
 <script>
-  let { video, liked } = $props();
+  let { video, liked, logged_user } = $props();
 
   async function handleLike(event, url) {
     event.preventDefault();
+    if (!logged_user) return;
 
     if (!liked) video.like++;
     else video.like--;

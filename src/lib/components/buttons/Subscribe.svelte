@@ -1,9 +1,9 @@
 <script>
-  let { subscribed, channelId, incresesub, decreasesub } = $props();
+  let { subscribed, channelId, incresesub, decreasesub, logged_user } = $props();
 
   async function handleFormSubmission(event, url) {
     event.preventDefault();
-
+    if (!logged_user) return
     if (subscribed) decreasesub();
     else incresesub();
     subscribed = !subscribed;

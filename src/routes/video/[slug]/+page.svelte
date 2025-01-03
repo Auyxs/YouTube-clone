@@ -23,11 +23,11 @@
         video={data.video}
         liked={data.liked}
         subscribed={data.subscribed}
+        logged_user={data.logged_user}
         showmenu={() => (showSaveMenu = true)}
       />
       <CommentSection comments={data.comments} logged_user={data.logged_user} />
     </div>
-
     <SuggestedVideos videos={data.suggestedVideos} />
   </div>
 </div>
