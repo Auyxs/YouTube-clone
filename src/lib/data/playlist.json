@@ -15,18 +15,20 @@
     "videos": [
       "36",
       "139",
-      "63"
+      "63",
+      "275"
     ]
   },
   {
     "name": "Music",
     "userId": 1,
     "videos": [
-      "36",
       "84",
       "269",
       "136",
-      "19"
+      "19",
+      "264",
+      "112"
     ]
   },
   {
@@ -42,5 +44,17 @@
     "name": "Watch later",
     "userId": 2,
     "videos": []
+  },
+  {
+    "userId": 2,
+    "name": "Favorites",
+    "videos": []
+  },
+  {
+    "userId": 1,
+    "name": "Best",
+    "videos": [
+      "292"
+    ]
   }
 ]
