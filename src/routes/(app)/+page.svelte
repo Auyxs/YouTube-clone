@@ -19,7 +19,7 @@
   <div class="content-area p-3 mt-5">
     <div class="row">
       {#each data.videos as video}
-        <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 mb-4">
+        <div class="col-12 col-sm-12 col-md-6 col-xl-4 mb-4">
           <VideoCard {video} currentRoute="/" />
         </div>
       {/each}

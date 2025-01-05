@@ -1,5 +1,4 @@
 <script>
-  /** @type {{ data: import('./$types').PageData, form: import('./$types').ActionData }} */
   let { data, form } = $props();
 </script>
 

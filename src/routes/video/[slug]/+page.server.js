@@ -1,6 +1,11 @@
+import { goto } from "$app/navigation";
 import { addComment, getVideoComments } from "$lib/server/comment.js";
 import { addLike, hasLiked, removeLike } from "$lib/server/like.js";
-import { addToPlaylist, getAllPlaylist, removeFromPlaylist } from "$lib/server/playlist.js";
+import {
+  addToPlaylist,
+  getAllPlaylist,
+  removeFromPlaylist,
+} from "$lib/server/playlist.js";
 import { isSubscribed } from "$lib/server/subscription.js";
 import { getVideoById, getVideos } from "$lib/server/video.js";
 import { redirect } from "@sveltejs/kit";
@@ -38,7 +43,7 @@ export const actions = {
       const { slug } = params;
       await addLike(locals.user.id, slug);
     } else {
-      redirect("302", "/login");
+      goto("/login");
     }
   },
   removelike: async ({ params, locals }) => {
@@ -46,7 +51,7 @@ export const actions = {
       const { slug } = params;
       await removeLike(locals.user.id, slug);
     } else {
-      redirect("302", "/login");
+      goto("/login");
     }
   },
   addcomment: async ({ params, locals, request }) => {
@@ -59,7 +64,7 @@ export const actions = {
         await addComment(locals.user.id, slug, commentText);
       }
     } else {
-      redirect("302", "/login");
+      goto("/login");
     }
   },
   updatePlaylist: async ({ request, locals }) => {

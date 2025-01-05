@@ -27,8 +27,10 @@
         method: 'POST',
         body: formData
     });
-    closemenu();
-    playlists.push({name: formData.get("title"), videos: []})
+    if (res.ok) {
+      closemenu();
+      playlists.push({name: formData.get("title"), videos: []})
+    }
   };
 </script>
 

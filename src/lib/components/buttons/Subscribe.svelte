@@ -1,18 +1,38 @@
 <script>
-  let { subscribed, channelId, incresesub, decreasesub, logged_user } = $props();
+  import { goto } from "$app/navigation";
 
-  async function handleFormSubmission(event, url) {
-    event.preventDefault();
-    if (!logged_user) return
+  let { subscribed, channelId, incresesub, decreasesub, logged_user } =
+    $props();
+
+  const updateUI = () => {
     if (subscribed) decreasesub();
     else incresesub();
     subscribed = !subscribed;
+  };
 
-    const formData = new FormData(event.target);
-    await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
+  async function handleFormSubmission(event, url) {
+    event.preventDefault();
+    try {
+      if (!logged_user) {
+        goto("/login");
+        return
+      }
+      updateUI();
+
+      const formData = new FormData(event.target);
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+      console.log(response)
+      if (!response.ok) {
+        console.error("Failed to update subscription:", await response.text());
+        updateUI();
+      }
+    } catch (error) {
+      console.error("An error occurred during form submission:", error);
+      updateUI();
+    }
   }
 </script>
 

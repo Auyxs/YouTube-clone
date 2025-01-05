@@ -1,6 +1,6 @@
-import { redirect } from '@sveltejs/kit';
+import { goto } from "$app/navigation";
 
 export const POST = async ({ cookies }) => {
-  cookies.delete('accessToken', { path: '/' }); 
-  redirect(302, '/'); 
+  cookies.delete("accessToken", { path: "/" });
+  goto('/')
 };

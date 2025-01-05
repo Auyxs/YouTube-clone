@@ -1,14 +1,19 @@
 import { Subscribe } from "$lib/server/subscription";
-import { getVideoById } from "$lib/server/video";
-import { redirect } from "@sveltejs/kit";
+import { json } from "@sveltejs/kit";
 
 export const POST = async ({ locals, request }) => {
-  if (locals.user != null) {
-    const formData = await request.formData();
-    const channelId = formData.get("channelId");
-    await Subscribe(locals.user.id, channelId);
-  } else {
-    return redirect(302, "/login");
+  if (!locals.user) {
+    return json({ error: "Unauthorized" }, { status: 401 });
   }
-  return new Response();
+
+  const formData = await request.formData();
+  const channelId = formData.get("channelId");
+
+  try {
+    await Subscribe(locals.user.id, channelId);
+    return json({ success: true });
+  } catch (error) {
+    console.error("Subscription failed:", error);
+    return json({ error: "Internal Server Error" }, { status: 500 });
+  }
 };
