@@ -10,21 +10,22 @@
     subscribed = !subscribed;
   };
 
-  async function handleFormSubmission(event, url) {
+  async function handleFormSubmission(event) {
     event.preventDefault();
     try {
       if (!logged_user) {
         goto("/login");
         return
       }
+      const method = subscribed ? 'DELETE' : 'POST';
       updateUI();
 
       const formData = new FormData(event.target);
-      const response = await fetch(url, {
-        method: "POST",
+      const response = await fetch("/api/subscription", {
+        method,
         body: formData,
       });
-      console.log(response)
+
       if (!response.ok) {
         console.error("Failed to update subscription:", await response.text());
         updateUI();

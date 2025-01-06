@@ -14,8 +14,8 @@
     formData.append("videoId", videoId);
     formData.append("action", action);
 
-    await fetch("?/updatePlaylist", {
-      method: "POST",
+    await fetch("/api/playlist", {
+      method: "PATCH",
       body: formData,
     });
   };
@@ -23,7 +23,7 @@
   const handleCreatePlaylist = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target)
-    const res = await fetch("/api/createplaylist", {
+    const res = await fetch("/api/playlist", {
         method: 'POST',
         body: formData
     });

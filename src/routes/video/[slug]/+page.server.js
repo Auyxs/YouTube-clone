@@ -66,18 +66,5 @@ export const actions = {
     } else {
       goto("/login");
     }
-  },
-  updatePlaylist: async ({ request, locals }) => {
-    const data = await request.formData();
-    const playlistName = data.get("playlistName");
-    const videoId = data.get("videoId");
-    const action = data.get("action");
-
-    if (action === "add") {
-      await addToPlaylist(videoId, locals.user.id, playlistName);
-    } else if (action === "remove") {
-      await removeFromPlaylist(videoId, locals.user.id, playlistName);
-    }
-    return { success: true };
-  },
+  }
 };
