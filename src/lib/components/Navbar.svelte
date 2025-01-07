@@ -1,5 +1,4 @@
 <script>
-  import { goto } from "$app/navigation";
   import SignIn from "./buttons/SignIn.svelte";
   let { logged_user } = $props();
   let isDropdownOpen = $state(false);
@@ -15,7 +14,7 @@
 
   const logout = async () => {
     const res = await fetch("/api/logout", { method: "POST" });
-    if (res.ok) goto("/login");
+    if (res.ok) window.location.reload(); 
   };
 </script>
 

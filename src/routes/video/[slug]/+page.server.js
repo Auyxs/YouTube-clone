@@ -1,14 +1,8 @@
-import { goto } from "$app/navigation";
-import { addComment, getVideoComments } from "$lib/server/comment.js";
-import { addLike, hasLiked, removeLike } from "$lib/server/like.js";
-import {
-  addToPlaylist,
-  getAllPlaylist,
-  removeFromPlaylist,
-} from "$lib/server/playlist.js";
+import { getVideoComments } from "$lib/server/comment.js";
+import { hasLiked } from "$lib/server/like.js";
+import { getAllPlaylist } from "$lib/server/playlist.js";
 import { isSubscribed } from "$lib/server/subscription.js";
 import { getVideoById, getVideos } from "$lib/server/video.js";
-import { redirect } from "@sveltejs/kit";
 
 export async function load({ params, locals }) {
   const { slug } = params;
@@ -35,23 +29,3 @@ export async function load({ params, locals }) {
     playlists,
   };
 }
-
-/** @satisfies {import('./$types').Actions} */
-export const actions = {
-  like: async ({ params, locals }) => {
-    if (locals.user != null) {
-      const { slug } = params;
-      await addLike(locals.user.id, slug);
-    } else {
-      goto("/login");
-    }
-  },
-  removelike: async ({ params, locals }) => {
-    if (locals.user != null) {
-      const { slug } = params;
-      await removeLike(locals.user.id, slug);
-    } else {
-      goto("/login");
-    }
-  },
-};
