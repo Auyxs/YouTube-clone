@@ -1,8 +1,11 @@
 <script>
+  import { blur } from "svelte/transition";
+  import CollapseMenu from "./CollapseMenu.svelte";
+
   let { playlist } = $props();
   let showCollapse = $state(false);
 
-  export const handlePlaylistDelete = async () => {
+  const handlePlaylistDelete = async () => {
     const formData = new FormData();
     formData.append("title", playlist.name);
 
@@ -16,7 +19,7 @@
 </script>
 
 {#if playlist}
-  <div class="card">
+  <div class="card" transition:blur>
     <a
       href="/playlist/{playlist.name.replace(' ', '_')}"
       class="video-link text-decoration-none"
@@ -90,41 +93,11 @@
         {/if}
 
         {#if showCollapse}
-          <div
-            class="rounded border position-absolute bg-white shadow-md"
-            style="z-index: 100; max-width: 250px; right: 0; bottom: 10;"
-          >
-            <div class="d-flex flex-column">
-              <!-- Delete Button -->
-              <button
-                onclick={handlePlaylistDelete}
-                class="d-flex align-items-center border-0 btn w-100 pe-5 py-2"
-                aria-label="Delete playlist"
-              >
-                <span class="material-symbols-outlined me-2">delete</span>
-                <p class="mb-0 fw-light">Delete</p>
-              </button>
-
-              <!-- Edit Button -->
-              <button
-                class="d-flex align-items-center border-0 btn w-100 pe-5 py-2"
-                aria-label="Edit playlist"
-              >
-                <span class="material-symbols-outlined me-2">edit</span>
-                <p class="mb-0 fw-light">Edit</p>
-              </button>
-            </div>
-          </div>
+          <CollapseMenu handleDelete={handlePlaylistDelete}/>
         {/if}
       </div>
     </div>
   </div>
 {/if}
 
-<style>
-  .btn:hover {
-    background-color: #f7f7f7;
-    border-radius: 10px;
-    color: rgb(53, 53, 53);
-  }
-</style>
+

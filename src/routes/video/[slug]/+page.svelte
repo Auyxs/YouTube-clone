@@ -26,7 +26,7 @@
         logged_user={data.logged_user}
         showmenu={() => (showSaveMenu = true)}
       />
-      <CommentSection comments={data.comments} logged_user={data.logged_user} />
+      <CommentSection comments={data.comments} logged_user={data.logged_user} videoId={data.video.id}/>
     </div>
     <SuggestedVideos videos={data.suggestedVideos} />
   </div>

@@ -1,6 +1,6 @@
-import { goto } from "$app/navigation";
+import { json } from "@sveltejs/kit";
 
 export const POST = async ({ cookies }) => {
   cookies.delete("accessToken", { path: "/" });
-  goto('/')
+  return json({ success: true });
 };

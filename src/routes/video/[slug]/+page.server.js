@@ -54,17 +54,4 @@ export const actions = {
       goto("/login");
     }
   },
-  addcomment: async ({ params, locals, request }) => {
-    if (locals.user != null) {
-      const { slug } = params;
-      const formData = await request.formData();
-      const commentText = formData.get("comment");
-
-      if (commentText) {
-        await addComment(locals.user.id, slug, commentText);
-      }
-    } else {
-      goto("/login");
-    }
-  }
 };

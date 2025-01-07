@@ -40,7 +40,7 @@
       <div class="mx-4">
         <Subscribe
           {subscribed}
-          logged_user={logged_user}
+          {logged_user}
           channelId={video.user.id}
           incresesub={() => subs++}
           decreasesub={() => subs--}
@@ -51,7 +51,7 @@
     <div class="col-6">
       <div class="d-flex flex-row justify-content-end">
         <div class="d-flex me-2">
-          <Like {video} {liked} logged_user={logged_user} />
+          <Like {video} {liked} {logged_user} />
 
           <button
             class="btn btn-light btn-round btn-right px-3 py-2 d-flex align-items-center"

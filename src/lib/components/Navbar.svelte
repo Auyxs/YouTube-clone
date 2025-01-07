@@ -1,12 +1,21 @@
 <script>
+  import { goto } from "$app/navigation";
   import SignIn from "./buttons/SignIn.svelte";
   let { logged_user } = $props();
   let isDropdownOpen = $state(false);
 
   const handleDropdownFocusLoss = ({ relatedTarget, currentTarget }) => {
-    if ( relatedTarget instanceof HTMLElement && currentTarget.contains(relatedTarget))
+    if (
+      relatedTarget instanceof HTMLElement &&
+      currentTarget.contains(relatedTarget)
+    )
       return;
     isDropdownOpen = false;
+  };
+
+  const logout = async () => {
+    const res = await fetch("/api/logout", { method: "POST" });
+    if (res.ok) goto("/login");
   };
 </script>
 
@@ -98,7 +107,7 @@
             </div>
 
             <div class="px-3 py-2 d-flex align-items-center">
-              <form action="/api/logout" method="POST">
+              <form onsubmit={logout}>
                 <button
                   type="submit"
                   class="d-flex align-items-center bg-transparent border-0"

@@ -64,7 +64,6 @@ export async function deletePlaylist(userId, playlistName) {
   const updatedPlaylistData = playlistData.filter(
     (pl) => pl.userId != +userId || pl.name !== playlistName
   );
-  console.log(updatedPlaylistData)
   await writeOnFile(PLAYLIST_DATA_FILE, updatedPlaylistData);
 }
 
