@@ -40,14 +40,14 @@
       </li>
 
       <li class="nav-item">
-        <a href="/playlist/Watch_later" class="nav-link">
+        <a href="/playlist/Watch%20later" class="nav-link">
           <span class="material-symbols-outlined me-4">schedule</span>
           Watch later
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/playlist/Liked_videos" class="nav-link">
+        <a href="/playlist/Liked%20videos" class="nav-link">
           <span class="material-symbols-outlined me-4">thumb_up</span>
           Liked videos
         </a>

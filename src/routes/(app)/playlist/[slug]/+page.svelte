@@ -13,7 +13,7 @@
     >
       <div class="p-4">
         {#if data.videos.length != 0}
-          <a href="/video/{data.videos[0].id}" class="video-link">
+          <a href="/video/{data.videos[0].id}/{data.playlistName}" class="video-link">
             <div
               class="position-relative"
               style="width: 100%; padding-bottom: 50%;"
@@ -42,7 +42,10 @@
               playlist with {data.videos.length} videos
             </p>
           </div>
-          <button class="btn btn-light btn-round px-5">▶ Play all</button>
+          <a href="/video/{data.videos[0].id}/{data.playlistName}" class="text-decoration-none">
+            <button class="btn btn-light btn-round px-5">▶ Play all</button>
+          </a>
+
         </div>
       </div>
     </div>
@@ -63,7 +66,7 @@
                 <h6 class="text-muted">{index + 1}</h6>
               </div>
               
-              <HorizontalVideoCard {video} />
+              <HorizontalVideoCard {video} playlistName={data.playlistName}/>
             </div>
           {/each}
         </div>

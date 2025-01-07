@@ -5,16 +5,15 @@ import { getLikedVideos } from "$lib/server/video.js";
 export async function load({ params, locals }) {
   let videos = [];
   const { slug } = params;
-  const playlistName = slug.replace("_", " ");
   if (locals.user) {
     try {
-      videos = await getPlaylistVideos(locals.user.id, playlistName);
+      videos = await getPlaylistVideos(locals.user.id, slug);
     } catch {
       console.log("playlist not found");
     }
   }
   return {
     videos: videos,
-    playlistName,
+    playlistName: slug,
   };
 }

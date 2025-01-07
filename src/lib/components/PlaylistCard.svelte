@@ -21,7 +21,7 @@
 {#if playlist}
   <div class="card" transition:blur>
     <a
-      href="/playlist/{playlist.name.replace(' ', '_')}"
+      href="/playlist/{playlist.name}"
       class="video-link text-decoration-none"
     >
       <!-- First Stacked Thumbnail -->

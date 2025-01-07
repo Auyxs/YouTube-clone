@@ -1,9 +1,9 @@
 <script>
-  let { video } = $props();
+  let { video, playlistName } = $props();
 </script>
 
 <div class="d-flex flex-row mb-2 p-0 m-0">
-  <a href="/video/{video.id}" class="video-link">
+  <a href="/video/{video.id}{playlistName ? "/" + playlistName : ""}" class="video-link">
     <div class="position-relative" style="width: 100%;">
       <img
         src="https://img.youtube.com/vi/{video.URL}/hqdefault.jpg"
@@ -20,8 +20,8 @@
   </a>
 
   <div class="ms-3">
-    <h6 class="mb-1">{video.title}</h6>
-    <p class="mb-0 text-muted" style="font-size: 14px;">
+    <h6 class="mb-1" style="font-size: 14px;">{video.title}</h6>
+    <p class="mb-0 text-muted" style="font-size: 13px;">
       {video.user.username} <br />
       {video.views.toLocaleString()} views
     </p>
