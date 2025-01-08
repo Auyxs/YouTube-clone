@@ -2,6 +2,8 @@
   import SignIn from "./buttons/SignIn.svelte";
 
   let { logged_user, subscriptions } = $props();
+  let limit = $state(5);
+  let expanded = $state(false);
 </script>
 
 <div
@@ -64,19 +66,33 @@
       <li class="nav-item mx-3">
         <h6>Subscriptions</h6>
       </li>
-      {#each subscriptions as channel}
-        <li class="nav-item">
-          <a class="nav-link" href="/channel/@{channel.username}">
-            <img
-              src={channel.image}
-              alt=""
-              class="rounded-circle profile me-3"
-              style="width: 25px; height: 25px;"
-            />
-            <p class="mb-0">{channel.username}</p>
-          </a>
-        </li>
+      {#each subscriptions as channel, index}
+        {#if index < limit}
+          <li class="nav-item">
+            <a class="nav-link" href="/channel/@{channel.username}">
+              <img
+                src={channel.image}
+                alt=""
+                class="rounded-circle profile me-3"
+                style="width: 25px; height: 25px;"
+              />
+              <p class="mb-0">{channel.username}</p>
+            </a>
+          </li>
+        {/if}
       {/each}
+      <li class="nav-item">
+        <button
+          onclick={() => {
+            limit = expanded ? 5 : subscriptions.length;
+            expanded = !expanded;
+          }}
+          class="nav-link w-100 text-dark"
+        >
+          <span class="material-symbols-outlined"> {expanded ? "keyboard_arrow_up " : "keyboard_arrow_down"} </span>
+          {expanded ? "Show less " : "Show more"}
+        </button>
+      </li>
       <hr />
     {/if}
 
