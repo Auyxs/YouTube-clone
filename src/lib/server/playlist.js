@@ -67,13 +67,13 @@ export async function deletePlaylist(userId, playlistName) {
   await writeOnFile(PLAYLIST_DATA_FILE, updatedPlaylistData);
 }
 
-export async function updatedPlaylistOrder(userId, playlistName, videos) {
+export async function updatePlaylistOrder(userId, playlistName, videos) {
   const playlistData = await readFromFile(PLAYLIST_DATA_FILE);
   const playlist = playlistData.find(
     (pl) => pl.userId == userId && pl.name == playlistName
   );
   playlist.videos = videos;
-  await writeOnFile(PLAYLIST_DATA_FILE, updatedPlaylistData);
+  await writeOnFile(PLAYLIST_DATA_FILE, playlistData);
 }
 
 export async function getAllPlaylist(userId) {

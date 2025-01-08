@@ -1,6 +1,7 @@
 import { getUserLikes } from "$lib/server/like.js";
 import { getPlaylistVideos } from "$lib/server/playlist.js";
 import { getLikedVideos } from "$lib/server/video.js";
+import { redirect } from "@sveltejs/kit";
 
 export async function load({ params, locals }) {
   let videos = [];
@@ -11,6 +12,8 @@ export async function load({ params, locals }) {
     } catch {
       console.log("playlist not found");
     }
+  } else {
+      redirect(302, "/")
   }
   return {
     videos: videos,

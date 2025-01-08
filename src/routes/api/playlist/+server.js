@@ -3,6 +3,7 @@ import {
   createPlaylist,
   deletePlaylist,
   removeFromPlaylist,
+  updatePlaylistOrder,
 } from "$lib/server/playlist";
 import { error, json } from "@sveltejs/kit";
 
@@ -57,6 +58,24 @@ export const PATCH = async ({ request, locals }) => {
     } else if (action === "remove") {
       await removeFromPlaylist(videoId, locals.user.id, playlistName);
     }
+    return json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error("Failed to update playlist:", error);
+    return json({ error: "Internal Server Error" }, { status: 500 });
+  }
+};
+
+// reorder playlist videos
+export const PUT = async ({ request, locals }) => {
+  if (!locals.user) {
+    return json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const formData = await request.formData();
+    const playlistName = formData.get("playlistName");
+    const videos = JSON.parse(formData.get("videos"));
+    await updatePlaylistOrder(locals.user.id, playlistName, videos);
     return json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("Failed to update playlist:", error);
