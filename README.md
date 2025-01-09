@@ -29,4 +29,5 @@ npm run dev
 ![Image Alt Text](assets/screenshots/home2.png)
 ![Image Alt Text](assets/screenshots/video.png)
 ![Image Alt Text](assets/screenshots/comment.png)
-![Image Alt Text](assets/screenshots/signin.png)
+![Image Alt Text](assets/screenshots/playlist1.png)
+![Image Alt Text](assets/screenshots/playlist2.png)
