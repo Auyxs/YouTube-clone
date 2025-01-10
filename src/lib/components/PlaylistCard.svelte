@@ -16,10 +16,19 @@
 
     if (res.ok) playlist = null;
   };
+
+  const handleCollapseFocusLoss = ({ relatedTarget, currentTarget }) => {
+    if (
+      relatedTarget instanceof HTMLElement &&
+      currentTarget.contains(relatedTarget)
+    )
+      return;
+    showCollapse = false;
+  };
 </script>
 
 {#if playlist}
-  <div class="card" transition:blur>
+  <div class="card" transition:blur onfocusout={handleCollapseFocusLoss}>
     <a
       href="/playlist/{playlist.name}"
       class="video-link text-decoration-none"

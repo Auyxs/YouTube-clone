@@ -20,10 +20,19 @@
       event.target.reset();
     }
   };
+
+  const handleCollapseFocusLoss = ({ relatedTarget, currentTarget }) => {
+    if (
+      relatedTarget instanceof HTMLElement &&
+      currentTarget.contains(relatedTarget)
+    )
+      return;
+    showCollapse = false;
+  };
 </script>
 
 {#if comment}
-  <div class="d-flex m-1 p-2" transition:fly>
+  <div class="d-flex m-1 p-2" transition:fly onfocusout={(handleCollapseFocusLoss)}>
     <div class="me-3">
       <img
         src={comment.user.image || ""}

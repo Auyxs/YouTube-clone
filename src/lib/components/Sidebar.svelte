@@ -1,9 +1,13 @@
 <script>
   import SignIn from "./buttons/SignIn.svelte";
+  import { page } from "$app/stores";
 
   let { logged_user, subscriptions } = $props();
   let limit = $state(5);
   let expanded = $state(false);
+  let currentPath = $derived($page.url.pathname);
+
+  const isActive = (path) => currentPath == path;
 </script>
 
 <div
@@ -12,14 +16,14 @@
 >
   <ul class="nav d-flex flex-column">
     <li class="nav-item">
-      <a href="/" class="nav-link active">
+      <a href="/" class="nav-link" class:active="{isActive("/")}">
         <span class="material-symbols-outlined me-4">home</span>
         Home
       </a>
     </li>
 
     <li class="nav-item">
-      <a href="/subscriptions" class="nav-link">
+      <a href="/subscriptions" class="nav-link" class:active="{isActive("/subscriptions")}">
         <span class="material-symbols-outlined me-4">subscriptions</span>
         Subscriptions
       </a>
@@ -28,28 +32,28 @@
     <hr />
     {#if logged_user != null}
       <li class="nav-item">
-        <a href="/channel/@{logged_user.username}" class="nav-link fs-6 fw-lg">
+        <a href="/channel/@{logged_user.username}" class="nav-link fs-6 fw-lg" class:active="{isActive("/channel/@" + logged_user.username)}">
           You
           <span class="material-symbols-outlined"> chevron_right </span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/playlists" class="nav-link">
+        <a href="/playlists" class="nav-link" class:active="{isActive("/playlists")}">
           <span class="material-symbols-outlined me-4">playlist_play</span>
           Playlists
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/playlist/Watch%20later" class="nav-link">
+        <a href="/playlist/Watch%20later" class="nav-link" class:active="{isActive("/playlist/Watch%20later")}">
           <span class="material-symbols-outlined me-4">schedule</span>
           Watch later
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="/playlist/Liked%20videos" class="nav-link">
+        <a href="/playlist/Liked%20videos" class="nav-link" class:active="{isActive("/playlist/Liked%20videos")}">
           <span class="material-symbols-outlined me-4">thumb_up</span>
           Liked videos
         </a>
@@ -69,7 +73,7 @@
       {#each subscriptions as channel, index}
         {#if index < limit}
           <li class="nav-item">
-            <a class="nav-link" href="/channel/@{channel.username}">
+            <a class="nav-link" href="/channel/@{channel.username}" class:active="{isActive("/channel/@" + channel.username)}">
               <img
                 src={channel.image}
                 alt=""
@@ -89,7 +93,9 @@
           }}
           class="nav-link w-100 text-dark"
         >
-          <span class="material-symbols-outlined"> {expanded ? "keyboard_arrow_up " : "keyboard_arrow_down"} </span>
+          <span class="material-symbols-outlined">
+            {expanded ? "keyboard_arrow_up " : "keyboard_arrow_down"}
+          </span>
           {expanded ? "Show less " : "Show more"}
         </button>
       </li>
