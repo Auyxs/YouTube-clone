@@ -8,8 +8,9 @@ export async function handle({ event, resolve }) {
     });
 
     if (res.ok) {
-      const user = await res.json();
-      event.locals.user = user;
+      const userData = await res.json();
+      const {id, username, image} = userData
+      event.locals.user = {id, username, image};
     } else {
       event.cookies.delete("accessToken", { path: "/" });
       event.locals.user = null;
