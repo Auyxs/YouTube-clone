@@ -3,14 +3,12 @@
   import CommentSection from "$lib/components/videopage/CommentSection.svelte";
   import SuggestedVideos from "$lib/components/videopage/SuggestedVideos.svelte";
   import VideoDetails from "$lib/components/videopage/VideoDetails.svelte";
-  import Navbar from "$lib/components/Navbar.svelte";
 
   let { data, children } = $props();
   let showSaveMenu = $state(false);
 </script>
 
 <div>
-  <Navbar logged_user={data.logged_user} />
   <div class="d-flex mt-5">
     {#if showSaveMenu}
       <SaveMenu
